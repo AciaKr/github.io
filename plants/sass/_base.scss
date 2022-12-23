@@ -151,7 +151,10 @@ h4 {
 .welcome__text {
     max-width: 525px;
     margin: 0 0 48px;
+    @extend %font-prim;
+    font-style: normal;
     font-size: 2rem;
+    font-weight: 400;
     line-height: 3.5rem;
 }
 
@@ -172,4 +175,34 @@ h4 {
         border: 2px solid #E06733;
         border-radius: 10px;
     }
+}
+
+// About
+
+.wrapper__about {
+    display: flex;
+    justify-content: space-between;
+    padding: 93px 109px;
+}
+
+.about__content {
+    max-width: 605px;
+    margin-top: 68px;
+}
+
+.about__title {
+    max-width: 463px;
+    margin: 0 0 40px;
+    .text-selection_orange {
+        color: #E06733;
+    }
+}
+
+.about__text {
+    @extend %font-prim;
+    font-size: 2rem;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 3rem;
+    margin: 0;
 }
