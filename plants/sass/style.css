@@ -377,6 +377,24 @@ h4 {
   margin: 0 auto;
 }
 
+.button {
+  width: 161px;
+  height: 50px;
+  text-align: center;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 2.6rem;
+  color: #E06733;
+  border: 1px solid #E06733;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.button:hover {
+  color: #FFFFFF;
+  background: #E06733;
+}
+
 .header {
   background-color: #EDF2EC;
 }
@@ -463,8 +481,9 @@ h4 {
   line-height: 3.5rem;
 }
 
-.button {
-  padding: 10px 26px;
+.button__welcome {
+  width: 158px;
+  height: 44px;
   font-style: normal;
   font-weight: 400;
   font-size: 1.6rem;
@@ -472,13 +491,10 @@ h4 {
   color: #000000;
   border: 2px solid #E06733;
   border-radius: 10px;
-  cursor: pointer;
 }
-.button:hover {
+.button__welcome:hover {
   color: #FFFFFF;
   background: #E06733;
-  border: 2px solid #E06733;
-  border-radius: 10px;
 }
 
 .wrapper__about {
@@ -508,15 +524,80 @@ h4 {
   margin: 0;
 }
 
+.service {
+  background-color: #EDF2EC;
+}
+
+.wrapper__service {
+  padding: 40px 109px;
+}
+
+.service__header {
+  display: flex;
+  justify-content: left;
+  margin-bottom: 90px;
+}
+
+.service__title {
+  max-width: 306px;
+  margin: 0 142px 0 0;
+}
+
+.service__buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 29px 0 15px;
+}
+.service__buttons > * {
+  margin-right: 38px;
+}
+.service__buttons:last-child {
+  margin-right: 0;
+}
+
+.services {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.service__item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 55px;
+}
+
+.service_descr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #E3E1D5;
+  border-radius: 0px 0px 20px 20px;
+}
+
+.service__image {
+  border-radius: 20px 20px 0px 0px;
+}
+
+.service__name {
+  margin: 10px 0;
+}
+
+.service__text {
+  margin: 0 0 36px;
+  color: #717171;
+}
+
 .navigation__link:hover {
   transition: all 0.3s ease-out;
 }
 
-body, h1, h3, h4, .welcome__text, .button, .about__text {
+body, h1, h3, h4, .welcome__text, .button__welcome, .about__text {
   font-family: "Inter", Verdana, sans-serif;
 }
 
-h2, .text__logo, .navigation {
+h2, .button, .text__logo, .navigation {
   font-family: "Inika", "Times New Roman", serif;
 }
 
