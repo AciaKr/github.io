@@ -1,0 +1,175 @@
+html {
+    font-size: 10px;
+    scroll-behavior: smooth;
+  }
+
+html, body, header, main, footer {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  @extend %font-prim;
+  font-size:  1.6rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2rem;
+  color: #636060;
+}
+
+h1 {
+    @extend %font-prim;
+    font-size: 4.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 5rem;
+    color: #717171;
+}
+
+h2 {
+    @extend %font-add;
+    font-size: 4rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 5.2rem;
+    color: #499A18;
+}
+
+h3 {
+    @extend %font-prim;
+    font-size: 4rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 5rem;
+    color: #000000;
+}
+
+h4 {
+    @extend %font-prim;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 2rem;
+    color: #E06733;
+}
+
+.wrapper {
+    max-width: 1440px;
+    margin: 0 auto;
+  }
+
+  // Header
+
+.header {
+    background-color: #EDF2EC;
+}
+
+.wrapper__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 42px 110px;
+}
+
+.logo {
+    text-decoration: none;
+}
+
+.logo__image {
+    width: 20px;
+    height: 20px;
+}
+
+.text__logo {
+    @extend %font-add;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 400;
+    color: #000000;
+}
+
+// Navigation
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0;
+    @extend %font-add;
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 50px;
+    list-style: none;
+    >* {
+        padding-right: 46px;
+        &:last-child {
+            padding: 0;
+        }
+    }
+}
+
+.navigation__link {
+    color: #010201;
+    text-decoration: none;
+    &:hover {
+        font-weight: 700;
+        color: #E06733;
+        @extend %transition;
+    }
+}
+
+// Welcome
+
+.welcome {
+    background-color: #EDF2EC;
+}
+
+.wrapper__welcome {
+    display: flex;
+    justify-content: right;
+    padding: 62px 109px;
+    background: url("../assets/images/leafs.png") 109px 62px / auto no-repeat;
+}
+
+.welcome__content {
+    max-width: 549px;
+    margin: 36px 0 32px;
+}
+
+.welcome__title {
+    margin: 0 0 42px;
+    .text-selection_green {
+        color: #499A18;
+    }
+}
+
+.welcome__text {
+    max-width: 525px;
+    margin: 0 0 48px;
+    font-size: 2rem;
+    line-height: 3.5rem;
+}
+
+.button {
+    padding: 10px 26px;
+    @extend %font-prim;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 2rem;
+    color: #000000;
+    border: 2px solid #E06733;
+    border-radius: 10px;
+    cursor: pointer;
+    &:hover {
+        color: #FFFFFF;
+        background: #E06733;
+        border: 2px solid #E06733;
+        border-radius: 10px;
+    }
+}

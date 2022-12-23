@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inika:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./sass/style.css">
     <title>Plants</title>
 </head>
 <body>
     <header class="header">
-        <div class="wrapper">
+        <div class="wrapper wrapper__header">
             <div class="wrapper__logo">
                 <a href="#" class="logo">
                     <img src="./assets/icons/logo.svg" class="logo__image" alt="Logo">
@@ -16,19 +20,19 @@
                 </a>
             </div>
             <nav class="header__navigation">
-                <ul class="navigation-list">
-                    <li class="navigation__item"><a href="#" class="navigation__link">Home</a></li>
-                    <li class="navigation__item"><a href="#" class="navigation__link">About us</a></li>
-                    <li class="navigation__item"><a href="#" class="navigation__link">Service</a></li>
-                    <li class="navigation__item"><a href="#" class="navigation__link">Price</a></li>
-                    <li class="navigation__item"><a href="#" class="navigation__link">Contacts</a></li>
+                <ul class="navigation">
+                    <li><a href="#" class="navigation__link">Home</a></li>
+                    <li><a href="#" class="navigation__link">About us</a></li>
+                    <li><a href="#" class="navigation__link">Service</a></li>
+                    <li><a href="#" class="navigation__link">Price</a></li>
+                    <li><a href="#" class="navigation__link">Contacts</a></li>
                 </ul>
             </nav>
         </div>
     </header>
     <main>
         <section class="welcome">
-            <div class="wrapper">
+            <div class="wrapper wrapper__welcome">
                 <div class="welcome__content">
                     <h1 class="welcome__title">We grow <span class="text-selection_green">plants</span> and give you oxygen</h1>
                     <p class="welcome__text">
@@ -36,7 +40,7 @@
                     </p>
                     <button class="button">LEARN MORE</button>
                 </div>
-                <img src="./assets/images/leafs.png" class="welcome__image" alt="Leafs">
+                <!--<img src="./assets/images/leafs.png" class="welcome__image" alt="Leafs">-->
             </div>
         </section>
         <section class="about">
@@ -107,7 +111,7 @@
         </section>
         <section class="contacts">
             <div class="wrapper">
-                <h3 class="contacts__title">Contact us</h3>
+                <h2 class="contacts__title">Contact us</h2>
                 <div class="contacts__container">
                     <span class="adress__name">City</span>
                     <span class="ico-arrow"></span>
