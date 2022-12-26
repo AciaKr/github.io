@@ -489,6 +489,7 @@ h4 {
   font-size: 1.6rem;
   line-height: 2rem;
   color: #000000;
+  background-color: #EDF2EC;
   border: 2px solid #E06733;
   border-radius: 10px;
 }
@@ -556,6 +557,10 @@ h4 {
   margin-right: 0;
 }
 
+.service__button {
+  background-color: #EDF2EC;
+}
+
 .services {
   display: flex;
   justify-content: space-between;
@@ -589,15 +594,153 @@ h4 {
   color: #717171;
 }
 
-.navigation__link:hover {
+.wrapper__prices {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px 109px;
+}
+
+.price__title {
+  margin: 0 0 90px;
+  line-height: 48px;
+}
+
+.prices__items {
+  width: 332px;
+  height: 282px;
+  padding: 34px 41px;
+  border: 1px solid #E3E1D5;
+  border-radius: 20px;
+}
+.prices__items > * {
+  margin-bottom: 32px;
+}
+
+.button__price {
+  width: 250px;
+  height: 50px;
+  padding: 0 40px;
+  background: #EDF2EC;
+  font-weight: 700;
+  font-size: 2rem;
+  color: #000000;
+  text-align: left;
+  cursor: pointer;
+  border: none;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.button__price:hover {
+  color: #000000;
+  background: #D6E7D2;
+}
+
+.ico {
+  width: 16px;
+  height: 16px;
+  background: #D9D9D9;
+  border-radius: 100%;
+}
+
+.ico-arrow {
+  width: 4px;
+  height: 4px;
+  margin: 5px auto 0;
+  border-top: 0.5px solid #717171;
+  border-right: 0.5px solid #717171;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.arrow-bottom {
+  transform: rotate(135deg);
+}
+
+.section__call-us {
+  max-width: 452px;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.call-us__title {
+  margin: 0 0 38px;
+  text-align: right;
+}
+.call-us__title .title_selection_green {
+  color: #499A18;
+}
+
+.button__call-us {
+  margin-bottom: 39px;
+  font-weight: 700;
+  background-color: #ffffff;
+}
+
+.call-us__image {
+  width: 152px;
+  height: 175px;
+  margin-bottom: 75px;
+}
+
+.contacts {
+  background-color: #EDF2EC;
+}
+
+.wrapper__contacts {
+  padding: 53px 109px 0 109px;
+  padding-bottom: 27.4%;
+  background-image: url("../assets/images/contact_woman.png");
+  background-position: 109px 53px;
+  background-repeat: no-repeat;
+}
+
+.contacts__title {
+  margin: 7px auto 0;
+  font-weight: 700;
+  text-align: center;
+}
+
+.wrapper__footer {
+  padding: 40px 109px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 2rem;
+  line-height: 5rem;
+  color: #000000;
+}
+
+.footer-copyright {
+  display: inline-flex;
+  align-items: center;
+}
+.footer-copyright > * {
+  margin-right: 20px;
+}
+
+.footer-social {
+  display: flex;
+  align-items: center;
+}
+.footer-social > * {
+  margin-left: 20px;
+}
+
+.footer__social-link {
+  display: inline-flex;
+}
+
+.button, .navigation__link:hover {
   transition: all 0.3s ease-out;
 }
 
-body, h1, h3, h4, .welcome__text, .button__welcome, .about__text {
+body, h1, h3, h4, .welcome__text, .button__welcome, .about__text, .button__price {
   font-family: "Inter", Verdana, sans-serif;
 }
 
-h2, .button, .text__logo, .navigation {
+h2, .text__logo, .navigation, .service__button, .button__call-us {
   font-family: "Inika", "Times New Roman", serif;
 }
 
