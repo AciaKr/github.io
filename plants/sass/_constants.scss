@@ -1,0 +1,30 @@
+$color-brand: #E06733;
+$color-additional: #717171;
+$color-background:#EDF2EC;
+$color-nav: #010201;
+$color-text:#636060;
+$color-text-add: #000000;
+$color-heading:#499A18;
+$color-light:#ffffff;
+
+// $color-border:#D7D7D7;
+// $color-link:#1943EF;
+// $color-hovered:#BCD0E5;
+// $color-hamburger:#173A56;
+
+$content-width: 1197px;
+$tablet-width: 768px;
+$mobile-big-width: 414px;
+$mobile-small-width: 320px;
+
+%transition {
+    transition: all .3s ease-out;
+}
+
+%font-prim {
+    font-family: 'Inter', Verdana, sans-serif;
+}
+
+%font-add {
+    font-family: 'Inika', 'Times New Roman', serif;
+}
