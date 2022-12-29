@@ -8,63 +8,60 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inika:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./sass/style.css">
+    <link rel="icon" href="./favicon.ico">
     <title>Plants</title>
 </head>
 <body>
     <header class="header">
-        <div class="wrapper wrapper__header">
-            <div class="wrapper__logo">
+        <div class="wrapper header__wrapper">
+            <div class="header__logo">
                 <a href="#" class="logo">
                     <img src="./assets/icons/logo.svg" class="logo__image" alt="Logo">
-                    <span class="text__logo">Plants</span>
+                    <span class="logo__text">Plants</span>
                 </a>
             </div>
             <nav class="header__navigation">
-                <ul class="navigation">
-                    <li><a href="#" class="navigation__link">Home</a></li>
-                    <li><a href="#" class="navigation__link">About us</a></li>
-                    <li><a href="#" class="navigation__link">Service</a></li>
-                    <li><a href="#" class="navigation__link">Price</a></li>
-                    <li><a href="#" class="navigation__link">Contacts</a></li>
+                <ul class="nav">
+                    <li><a href="#welcome" class="nav__link nav_checked">Home</a></li>
+                    <li><a href="#about-us" class="nav__link">About us</a></li>
+                    <li><a href="#service" class="nav__link">Service</a></li>
+                    <li><a href="#price" class="nav__link">Price</a></li>
+                    <li><a href="#contacts" class="nav__link">Contacts</a></li>
                 </ul>
             </nav>
         </div>
     </header>
     <main>
-        <section class="welcome">
-            <div class="wrapper wrapper__welcome">
+        <section class="welcome" id="welcome">
+            <div class="wrapper welcome__wrapper">
                 <div class="welcome__content">
                     <h1 class="welcome__title">We grow <span class="text-selection_green">plants</span> and give you oxygen</h1>
-                    <p class="welcome__text">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                    <p class="welcome__text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
                     </p>
-                    <button class="button button__welcome">LEARN MORE</button>
+                    <button class="button welcome__btn">LEARN MORE</button>
                 </div>
-                <!--<img src="./assets/images/leafs.png" class="welcome__image" alt="Leafs">-->
             </div>
         </section>
-        <section class="about">
-            <div class="wrapper wrapper__about">
+        <section class="about" id="about-us">
+            <div class="wrapper about__wrapper">
                 <div class="about__content">
                     <h2 class="about__title">We are <span class="text-selection_orange">professional experienced</span> gardeners</h2>
-                    <p class="about__text">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                    <p class="about__text"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
                     </p>
                 </div>
-                <img src="./assets/images/houseplant.png" class="about__image" alt="Houseplant">
             </div>
         </section>
-        <section class="service">
-            <div class="wrapper wrapper__service">
+        <section class="service" id="service">
+            <div class="wrapper service__wrapper">
                 <div class="service__header">
                     <h2 class="service__title">Service and our projects</h2>
                     <div class="service__buttons">
-                        <button class="button service__button">Gardens</button>
-                        <button class="button service__button">Lawn</button>
-                        <button class="button service__button">Planting</button>
+                        <button class="button service__btn">Gardens</button>
+                        <button class="button service__btn">Lawn</button>
+                        <button class="button service__btn">Planting</button>
                     </div>
                 </div>
-                <div class="services">
+                <div class="service__items">
                     <div class="service__item">
                         <img src="./assets/images/garden_care_1.jpg" class="service__image" alt="Garden care">
                         <div class="service_descr">
@@ -110,75 +107,88 @@
                 </div>
             </div>
         </section>
-        <section class="prices">
-            <div class="wrapper wrapper__prices">
+        <section class="prices" id="price">
+            <div class="wrapper prices__wrapper">
                 <div class="section__prices">
-                    <h3 class="price__title">Prices</h3>
+                    <h2 class="prices__title">Prices</h2>
                     <div class="prices__items">
-                        <!-- <details>
-                            <summary>Basics</summary>
-                        </details> -->
-                        <button class="button button__price">
-                            <span>Basics</span>
+                        <button class="button prices__btn">
+                            <span class="item__name">Basics</span>
                             <div class="ico">
-                                <div class="ico-arrow arrow-bottom"></div>
+                                <div class="ico-arrow_grey"></div>
                             </div>
                         </button>
-                        <button class="button button__price">
+                        <button class="button prices__btn">
                             <span class="item__name">Standard</span>
                             <div class="ico">
-                                <div class="ico-arrow arrow-bottom"></div>
+                                <div class="ico-arrow_grey"></div>
                             </div>
                         </button>
-                        <button class="button button__price">
-                            <span>Pro care</span>
+                        <button class="button prices__btn">
+                            <span class="item__name">Pro care</span>
                             <div class="ico">
-                                <div class="ico-arrow arrow-bottom"></div>
+                                <div class="ico-arrow_grey"></div>
                             </div>
                         </button>
                     </div>
                 </div>
-                <div class="section__call-us">
+                <div class="call-us">
                     <h3 class="call-us__title">Our best <span class="title_selection_green">gardeners</span> are ready to help you</h3>
-                    <button class="button button__call-us">Contact us</button>
-                    <img src="./assets/images/leafs_small.png" class="call-us__image" alt="Leafs">
+                    <button class="button call-us__btn">Contact us</button>
                 </div>
             </div>
         </section>
-        <section class="contacts">
-            <div class="wrapper wrapper__contacts">
+        <section class="contacts" id="contacts">
+            <div class="wrapper contacts__wrapper">
                 <h2 class="contacts__title">Contact us</h2>
-                <div class="contacts__container">
-                    <span class="adress__name">City</span>
-                    <span class="ico-arrow"></span>
+                <div class="addresses__wrapper">
+                    <button class="button addresses__btn">
+                        <span>City</span>
+                        <div class="ico ico_opened">
+                            <div class="ico-arrow_white"></div>
+                        </div>
+                    </button>
+                    <!-- <select name="select" class="select">
+                        <option value="value1" selected >City</option>
+                        <option value="value2">Значение 2</option>
+                        <option value="value3">Значение 3</option>
+                    </select> -->
                 </div>
             </div>
         </section>
     </main>
     <footer class="footer">
-        <div class="wrapper wrapper__footer">
+        <div class="wrapper footer__wrapper">
             <div class="footer-copyright">
-                <img src="./assets/icons/copyright.svg" alt="copyright">
+                <span>&copy</span>
                 <span>2022</span>
-                <span>github</span>
+                <span><a href="https://github.com/AciaKr/" class="footer__link">github</a></span>
             </div>
             <div class="footer-rss">
-                <span>Rolling Scopes School</span>
+                <a href="https://rs.school/js-stage0/" class="footer__link">Rolling Scopes School</a>
             </div>
-            <div class="footer-social">
-                <a href="#" class="footer__social-link">
-                    <img src="./assets/icons/instagram.svg" alt="Instagram">
-                </a>
-                <a href="#" class="footer__social-link">
-                    <img src="./assets/icons/facebook.svg" alt="Facebook">
-                </a>
-                <a href="#" class="footer__social-link">
-                    <img src="./assets/icons/twitter.svg" alt="Twitter">
-                </a>
-                <a href="#" class="footer__social-link">
-                    <img src="./assets/icons/pinterest.svg" alt="Pinterest">
-                </a>
-            </div>
+            <ul class="footer-social">
+                <li>
+                    <a href="#" class="footer-social__link">
+                        <img src="./assets/icons/instagram.svg" alt="Instagram">
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="footer-social__link">
+                        <img src="./assets/icons/facebook.svg" alt="Facebook">
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="footer-social__link">
+                        <img src="./assets/icons/twitter.svg" alt="Twitter">
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="footer-social__link">
+                        <img src="./assets/icons/pinterest.svg" alt="Pinterest">
+                    </a>
+                </li>
+            </ul>
         </div>
     </footer>
 </body>
