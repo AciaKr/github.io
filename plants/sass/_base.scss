@@ -97,8 +97,8 @@ h3 {
     text-decoration: none;
 
     &__image {
-        width: 20px;
-        height: 20px;
+        width: 21px;
+        height: 21px;
     }
 
     &__text {
@@ -136,7 +136,7 @@ h3 {
     list-style: none;
 
     >* {
-        padding-left: 46px;
+        padding-left: 47px;
     }
 
     &__link {
@@ -168,7 +168,7 @@ h3 {
         display: flex;
         justify-content: right;
         padding: 62px 109px;
-        background: url("../assets/images/leafs.png") 109px 62px / auto no-repeat;
+        background: url("../assets/images/leafs.png") 100px 54px / auto no-repeat;
     }
 
     &__content {
@@ -177,7 +177,7 @@ h3 {
     }
 
     &__title {
-        margin: 0 0 42px;
+        margin: 0 0 44px;
 
         .text-selection_green {
             color: #499A18;
@@ -234,7 +234,7 @@ h3 {
 
     &__title {
         max-width: 463px;
-        margin: 0 0 40px;
+        margin: 0 0 38px;
 
         .text-selection_orange {
             color: #E06733;
@@ -316,11 +316,11 @@ h3 {
     }
 
     &__name {
-        margin: 10px 0;
+        margin: 9px 0 15px;
     }
 
     &__text {
-        margin: 0 0 36px;
+        margin: 0 0 34px;
         color: #717171;
     }
 }
