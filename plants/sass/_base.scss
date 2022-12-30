@@ -66,7 +66,6 @@ h3 {
     border: 1px solid #E06733;
     border-radius: 5px;
     cursor: pointer;
-    @extend %transition;
 
     &:hover {
         color: #FFFFFF;
@@ -209,9 +208,8 @@ h3 {
         border: 2px solid #E06733;
         border-radius: 10px;
 
-        &:hover {
-            color: #FFFFFF;
-            background: #E06733;
+        span {
+            @extend %font-prim;
         }
 
     }
@@ -359,6 +357,9 @@ h3 {
 }
 
 .prices__btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 250px;
     height: 50px;
     padding: 0 40px;
@@ -366,13 +367,11 @@ h3 {
     font-weight: 700;
     font-size: 2rem;
     color: #000000;
-    text-align: left;
-    cursor: pointer;
     border: none;
     border-radius: 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    text-align: left;
+    cursor: pointer;
+
 
     span {
         @extend %font-prim;
@@ -382,9 +381,11 @@ h3 {
     &:active {
         color: #000000;
         background: #D6E7D2;
+        @extend %transition;
 
         .ico {
             background: #AEA1A1;
+            @extend %transition;
 
             &-arrow_inactive {
                 background-image: url("../assets/icons/arrow_wh.svg");
@@ -463,7 +464,7 @@ h3 {
 
     &__wrapper {
         padding: 53px 109px 352px 109px;
-         background: url("../assets/images/contact_woman.png") 109px 53px/auto no-repeat;
+        background: url("../assets/images/contact_woman.png") 109px 53px/auto no-repeat;
     }
 
     &__title {
@@ -509,9 +510,11 @@ h3 {
             border: 1px solid #D6E7D2;
             border-radius: 0px;
             box-shadow: none;
+            @extend %transition;
 
             .ico_active {
                 background: #8BA07E;
+                @extend %transition;
             }
 
             .ico-arrow_active {
