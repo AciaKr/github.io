@@ -483,11 +483,6 @@ h3 {
   border: 2px solid #E06733;
   border-radius: 10px;
 }
-.welcome__btn:hover {
-  color: #FFFFFF;
-  background: #E06733;
-}
-
 .about__wrapper {
   display: flex;
   justify-content: flex-start;
@@ -593,6 +588,9 @@ h3 {
 }
 
 .prices__btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 250px;
   height: 50px;
   padding: 0 40px;
@@ -600,13 +598,10 @@ h3 {
   font-weight: 700;
   font-size: 2rem;
   color: #000000;
-  text-align: left;
-  cursor: pointer;
   border: none;
   border-radius: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  text-align: left;
+  cursor: pointer;
 }
 .prices__btn:hover, .prices__btn:active {
   color: #000000;
@@ -757,11 +752,11 @@ h3 {
   color: #E06733;
 }
 
-.button, .button:hover, .logo:hover .logo__text, .nav__link:hover, .footer__link:hover {
+.button:hover, .logo:hover .logo__text, .nav__link:hover, .prices__btn:hover, .prices__btn:active, .prices__btn:hover .ico, .prices__btn:active .ico, .addresses__btn:hover, .addresses__btn:active, .addresses__btn:hover .ico_active, .addresses__btn:active .ico_active, .footer__link:hover {
   transition: all 0.3s ease-out;
 }
 
-body, h1, h3, .welcome__text, .welcome__btn, .about__text, .prices__title, .prices__btn span, .call-us__text, .addresses__btn span {
+body, h1, h3, .welcome__text, .welcome__btn, .welcome__btn span, .about__text, .prices__title, .prices__btn span, .call-us__text, .addresses__btn span {
   font-family: "Inter", Verdana, sans-serif;
 }
 
