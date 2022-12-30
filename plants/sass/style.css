@@ -403,8 +403,8 @@ h3 {
   text-decoration: none;
 }
 .logo__image {
-  width: 20px;
-  height: 20px;
+  width: 21px;
+  height: 21px;
 }
 .logo__text {
   font-size: 1.6rem;
@@ -429,7 +429,7 @@ h3 {
   list-style: none;
 }
 .nav > * {
-  padding-left: 46px;
+  padding-left: 47px;
 }
 .nav__link {
   color: #010201;
@@ -451,14 +451,14 @@ h3 {
   display: flex;
   justify-content: right;
   padding: 62px 109px;
-  background: url("../assets/images/leafs.png") 109px 62px/auto no-repeat;
+  background: url("../assets/images/leafs.png") 100px 54px/auto no-repeat;
 }
 .welcome__content {
   max-width: 549px;
   margin: 36px 0 32px;
 }
 .welcome__title {
-  margin: 0 0 42px;
+  margin: 0 0 44px;
 }
 .welcome__title .text-selection_green {
   color: #499A18;
@@ -495,7 +495,7 @@ h3 {
 }
 .about__title {
   max-width: 463px;
-  margin: 0 0 40px;
+  margin: 0 0 38px;
 }
 .about__title .text-selection_orange {
   color: #E06733;
@@ -557,10 +557,10 @@ h3 {
   border-radius: 0px 0px 20px 20px;
 }
 .service__name {
-  margin: 10px 0;
+  margin: 9px 0 15px;
 }
 .service__text {
-  margin: 0 0 36px;
+  margin: 0 0 34px;
   color: #717171;
 }
 
