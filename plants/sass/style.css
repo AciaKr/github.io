@@ -357,14 +357,6 @@ h2 {
 }
 
 h3 {
-  font-size: 4rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 5rem;
-  color: #000000;
-}
-
-h4 {
   font-size: 2rem;
   font-style: normal;
   font-weight: 700;
@@ -420,6 +412,10 @@ h4 {
   font-weight: 400;
   color: #000000;
 }
+.logo:hover .logo__text {
+  color: #E06733;
+  text-shadow: 0.5px 0 0 #E06733;
+}
 
 .nav {
   display: flex;
@@ -439,8 +435,12 @@ h4 {
   color: #010201;
   text-decoration: none;
 }
+.nav__link:hover {
+  color: #E06733;
+  text-shadow: 0.5px 0 0 #E06733;
+}
 .nav .nav_checked {
-  font-weight: 700;
+  text-shadow: 0.5px 0 0 #E06733;
   color: #E06733;
 }
 
@@ -608,9 +608,16 @@ h4 {
   justify-content: space-between;
   align-items: center;
 }
-.prices__btn:hover {
+.prices__btn:hover, .prices__btn:active {
   color: #000000;
-  background: #EDF2EC;
+  background: #D6E7D2;
+}
+.prices__btn:hover .ico, .prices__btn:active .ico {
+  background: #AEA1A1;
+}
+.prices__btn:hover .ico-arrow_inactive, .prices__btn:active .ico-arrow_inactive {
+  background-image: url("../assets/icons/arrow_wh.svg");
+  transform: rotate(180deg);
 }
 
 .ico {
@@ -622,16 +629,16 @@ h4 {
   background: #D9D9D9;
   border-radius: 100%;
 }
-.ico_opened {
+.ico_active {
   background: #AEA1A1;
 }
-.ico-arrow_grey {
+.ico-arrow_inactive {
   width: 6px;
   height: 4px;
   background-image: url("../assets/icons/arrow_gr.svg");
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
-.ico-arrow_white {
+.ico-arrow_active {
   width: 6px;
   height: 4px;
   background-image: url("../assets/icons/arrow_wh.svg");
@@ -645,11 +652,16 @@ h4 {
   align-items: end;
   background: url("../assets/images/leafs_small.png") right -10px bottom -20px/auto no-repeat;
 }
-.call-us__title {
+.call-us__text {
   margin: 0 0 39px;
+  font-size: 4rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 5rem;
+  color: #000000;
   text-align: right;
 }
-.call-us__title .title_selection_green {
+.call-us__text .text-selection_green {
   color: #499A18;
 }
 .call-us__btn {
@@ -680,7 +692,7 @@ h4 {
   align-items: center;
   width: 450px;
   height: 50px;
-  border: 0px;
+  border: 1px solid #D6E7D2;
   border-radius: 0px;
   padding: 0 35px 0 20px;
   background: #D6E7D2;
@@ -691,9 +703,18 @@ h4 {
   color: #717171;
   cursor: pointer;
 }
-.addresses__btn:hover {
+.addresses__btn:hover, .addresses__btn:active {
   color: #717171;
-  background: #D6E7D2;
+  background: #C1E698;
+  border: 1px solid #D6E7D2;
+  border-radius: 0px;
+  box-shadow: none;
+}
+.addresses__btn:hover .ico_active, .addresses__btn:active .ico_active {
+  background: #8BA07E;
+}
+.addresses__btn:hover .ico-arrow_active, .addresses__btn:active .ico-arrow_active {
+  transform: rotate(180deg);
 }
 
 .footer__wrapper {
@@ -736,11 +757,11 @@ h4 {
   color: #E06733;
 }
 
-.button, .button:hover, .footer__link:hover {
+.button, .button:hover, .logo:hover .logo__text, .nav__link:hover, .footer__link:hover {
   transition: all 0.3s ease-out;
 }
 
-body, h1, h3, h4, .welcome__text, .welcome__btn, .about__text, .prices__title, .prices__btn span, .addresses__btn span {
+body, h1, h3, .welcome__text, .welcome__btn, .about__text, .prices__title, .prices__btn span, .call-us__text, .addresses__btn span {
   font-family: "Inter", Verdana, sans-serif;
 }
 
