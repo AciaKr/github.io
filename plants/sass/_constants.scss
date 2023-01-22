@@ -6,15 +6,19 @@ $color-text:#636060;
 $color-text-add: #000000;
 $color-heading:#499A18;
 $color-light:#ffffff;
-
-// $color-border:#D7D7D7;
+$color-border:#E3E1D5;
+$color-drop-down:#D6E7D2;
+$color-drop-down-active:#C1E698;
+$color-ico: #D9D9D9;
+$color-ico-inactive: #AEA1A1;
+$color-ico-active: #8BA07E;
 // $color-link:#1943EF;
 // $color-hovered:#BCD0E5;
 // $color-hamburger:#173A56;
 
-$content-width: 1197px;
+$content-width: 1440px;
 $tablet-width: 768px;
-$mobile-big-width: 414px;
+$mobile-big-width: 380px;
 $mobile-small-width: 320px;
 
 %transition {
@@ -27,4 +31,16 @@ $mobile-small-width: 320px;
 
 %font-add {
     font-family: 'Inika', 'Times New Roman', serif;
+}
+
+@mixin media-tablet {
+    @media (max-width: $tablet-width) { @content; }
+}
+
+@mixin media-mobile {
+    @media (max-width: $mobile-big-width) { @content; }
+}
+
+@mixin media-mobile-small {
+    @media (max-width: $mobile-small-width) { @content; }
 }

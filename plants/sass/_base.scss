@@ -9,16 +9,20 @@ html, body, header, main, footer {
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 100vh;
-  @extend %font-prim;
-  font-size:  1.6rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 2rem;
-  color: #636060;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+    @extend %font-prim;
+    font-size:  1.6rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 2rem;
+    color: $color-text;
+
+    @include media-mobile-small {
+        width: 320px;
+    }
 }
 
 h1 {
@@ -27,7 +31,16 @@ h1 {
     font-style: normal;
     font-weight: 700;
     line-height: 5rem;
-    color: #717171;
+    color: $color-additional;
+
+    @include media-tablet {
+        font-size: 3.5rem;
+    }
+
+    @include media-mobile {
+        font-size: 2.5rem;
+        line-height: 3.5rem;
+    }
 }
 
 h2 {
@@ -36,7 +49,17 @@ h2 {
     font-style: normal;
     font-weight: 400;
     line-height: 5.2rem;
-    color: #499A18;
+    color: $color-heading;
+
+    @include media-tablet {
+        font-size: 3.5rem;
+        line-height: 4.6rem;
+    }
+
+    @include media-mobile {
+        font-size: 2.5rem;
+        line-height: 3.3rem;
+    }
 }
 
 h3 {
@@ -45,13 +68,13 @@ h3 {
     font-style: normal;
     font-weight: 700;
     line-height: 2rem;
-    color: #E06733;
+    color: $color-brand;
 }
 
 .wrapper {
     max-width: 1440px;
     margin: 0 auto;
-  }
+}
 
 .button {
     width: 161px;
@@ -62,14 +85,14 @@ h3 {
     font-weight: 400;
     font-size: 2rem;
     line-height: 2.6rem;
-    color: #E06733;
-    border: 1px solid #E06733;
+    color: $color-brand;
+    border: 1px solid $color-brand;
     border-radius: 5px;
     cursor: pointer;
 
     &:hover {
-        color: #FFFFFF;
-        background: #E06733;
+        color: $color-light;
+        background: $color-brand;
         @extend %transition;
     }
 
@@ -78,15 +101,23 @@ h3 {
  // Header
 
 .header {
-    background-color: #EDF2EC;
+    background-color: $color-background;
 
     &__wrapper {
         display: flex;
         justify-content: space-between;
         align-items: baseline;
         padding: 42px 109px 42px 111px;
-    }
 
+        @include media-tablet {
+            padding: 35px 50px;
+        }
+
+        @include media-mobile {
+            padding: 36px 25px;
+            align-items: center;
+        }
+    }
 }
 
  // Logo
@@ -106,19 +137,17 @@ h3 {
         font-size: 1.6rem;
         font-style: normal;
         font-weight: 400;
-        color: #000000;
+        color: $color-text-add;
     }
 
     &:hover {
 
         .logo__text {
-            color: #E06733;
-            text-shadow: 0.5px 0 0 #E06733;
+            color: $color-brand;
+            text-shadow: 0.5px 0 0 $color-brand;
             @extend %transition;
         }
-
     }
-
 }
 
 // Navigation
@@ -135,54 +164,92 @@ h3 {
     line-height: 50px;
     list-style: none;
 
+    @include media-mobile {
+        display: none;
+    }
+
     >* {
         padding-left: 47px;
     }
 
     &__link {
-        color: #010201;
+        color: $color-nav;
         text-decoration: none;
 
         &:hover {
             // font-weight: 700;
-            color: #E06733;
-            text-shadow: 0.5px 0 0 #E06733;
+            color: $color-brand;
+            text-shadow: 0.5px 0 0 $color-brand;
             @extend %transition;
         }
-
     }
 
     .nav_checked {
-        text-shadow: 0.5px 0 0 #E06733;
-        color: #E06733;
+        text-shadow: 0.5px 0 0 $color-brand;
+        color: $color-brand;
     }
-
 }
 
 // Welcome
 
 .welcome {
-    background-color: #EDF2EC;
+    background-color: $color-background;
 
     &__wrapper {
         display: flex;
-        justify-content: right;
+        justify-content: space-between;
         padding: 62px 109px;
-        background: url("../assets/images/leafs.png") 100px 54px / auto no-repeat;
+        // background: url("../assets/images/leafs.png") 100px 54px / auto no-repeat;
+
+        @include media-tablet {
+            flex-direction: row-reverse;
+            padding: 40px 50px 70px;
+        }
+
+        @include media-mobile {
+            padding: 24px 25px;
+            background: none;
+        }
+    }
+
+    &__image {
+        width: 80%;
+        background: url("../assets/images/leafs.png") top -8px left -9px / auto no-repeat;
+
+        @include media-tablet {
+            background: url("../assets/images/leafs.png") right 9px top -8px / 90% no-repeat;
+            filter: blur(1.5px);
+        }
+
+        @include media-mobile {
+            display: none;
+        }
     }
 
     &__content {
         max-width: 549px;
         margin: 36px 0 32px;
+
+        @include media-tablet {
+            max-width: 346px;
+            margin: 0;
+        }
     }
 
     &__title {
         margin: 0 0 44px;
 
-        .text-selection_green {
-            color: #499A18;
+        @include media-tablet {
+            margin: 0 0 30px;
         }
 
+        @include media-mobile {
+            margin: 0 0 20px;
+        }
+
+        .text-selection_green {
+            color: $color-heading;
+        }
     }
 
     &__text {
@@ -193,6 +260,16 @@ h3 {
         font-size: 2rem;
         font-weight: 400;
         line-height: 3.5rem;
+
+        @include media-tablet {
+            font-size: 1.6rem;
+            line-height: 2.5rem;
+            margin: 0 0 34px 5px;
+        }
+
+        @include media-mobile {
+            margin: 0 0 26px 0;
+        }
     }
 
     &__btn {
@@ -203,17 +280,21 @@ h3 {
         font-weight: 400;
         font-size: 1.6rem;
         line-height: 2rem;
-        color: #000000;
-        background-color: #EDF2EC;
-        border: 2px solid #E06733;
+        color: $color-text-add;
+        background-color: $color-background;
+        border: 2px solid $color-brand;
         border-radius: 10px;
 
         span {
             @extend %font-prim;
         }
 
+        @include media-mobile {
+            width: 100px;
+            height: 34.14px;
+            font-size: 1rem;
+        }
     }
-
 }
 
 // About
@@ -222,24 +303,48 @@ h3 {
 
     &__wrapper {
         display: flex;
-        justify-content: flex-start;
+        justify-content: space-between;
+        flex-wrap: wrap;
         padding: 93px 109px 155px 109px;
-        background: url("../assets/images/houseplant.png") top 93px right 109px/auto no-repeat;
+        // background: url("../assets/images/houseplant.png") top 93px right 109px/auto no-repeat;
+
+        @include media-tablet {
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 50px;
+        }
+
+        @include media-mobile {
+            padding: 30px 25px;
+        }
     }
 
     &__content {
         max-width: 605px;
         margin-top: 68px;
+
+        @include media-tablet {
+            max-width: 668px;
+            margin-top: 0;
+        }
     }
 
     &__title {
         max-width: 463px;
         margin: 0 0 38px;
 
-        .text-selection_orange {
-            color: #E06733;
+        @include media-tablet {
+            text-align: center;
+            margin: 0 auto 50px;
         }
 
+        @include media-mobile {
+            margin: 0 auto 14px;
+        }
+
+        .text-selection_orange {
+            color: $color-brand;
+        }
     }
 
     &__text {
@@ -249,17 +354,44 @@ h3 {
         font-style: normal;
         line-height: 3rem;
         margin: 0;
+
+        @include media-mobile {
+            font-size: 1.5rem;
+            line-height: 2.5rem;
+        }
     }
 
+    &__image {
+        @include media-tablet {
+            width: 250px;
+            height: 258px;
+            margin: 68px 0 55px;
+        }
+
+        @include media-mobile {
+            width: 150px;
+            height: 147px;
+            margin: 5px 0 0;
+        }
+
+    }
 }
 
 // Service
 
 .service {
-    background-color: #EDF2EC;
+    background-color: $color-background;
 
     &__wrapper {
         padding: 40px 109px 121px 109px;
+
+        @include media-tablet {
+            padding: 60px 50px 70px 50px;
+        }
+
+        @include media-mobile {
+            padding: 30px 25px 27px 25px;
+        }
     }
 
     &__header {
@@ -267,28 +399,68 @@ h3 {
         justify-content: left;
         align-items: center;
         margin-bottom: 80px;
+
+        @include media-tablet {
+            flex-direction: column;
+            justify-content: start;
+            align-items: start;
+            margin-bottom: 40px;
+        }
     }
 
     &__title {
         max-width: 306px;
         margin: 0 142px 0 0;
+
+        @include media-tablet {
+            margin: 0 0 40px;
+        }
+
+        @include media-mobile {
+            max-width: 187px;
+            margin: 0 0 39px;
+        }
     }
 
     &__buttons {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        flex-wrap: wrap;
+        row-gap: 9px;
         margin: 18px 0 15px;
+
+        @include media-tablet {
+            margin: 0;
+        }
+
+        @include media-mobile {
+            justify-content: start;
+        }
 
         >* {
             margin-right: 38px;
+            &:last-child {
+                margin-right: 0;
+            }
+
+            @include media-mobile {
+                margin-right: 10px;
+            }
         }
 
     }
 
     &__btn {
         @extend %font-add;
-        background-color: #EDF2EC;
+        background-color: $color-background;
+
+        @include media-mobile {
+            width: 121px;
+            height: 35px;
+            font-size: 1.5rem;
+            line-height: 2rem;
+        }
     }
 
     &__items {
@@ -296,6 +468,16 @@ h3 {
         justify-content: space-between;
         flex-wrap: wrap;
         row-gap: 55px;
+        column-gap: 10px;
+
+        @include media-tablet {
+            row-gap: 38px;
+        }
+
+        @include media-mobile {
+            justify-content: center;
+            row-gap: 34px;
+        }
     }
 
     &__item {
@@ -303,25 +485,59 @@ h3 {
         flex-direction: column;
     }
 
+    &__image-box {
+        position: relative;
+        overflow: hidden;
+        width: 329px;
+        height: 350px;
+
+        @include media-tablet {
+            width: 280px;
+            height: 350px;
+        }
+    }
+
     &__image {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 329px;
+        height: 350px;
         border-radius: 20px 20px 0px 0px;
+        transform:translate(-50%,-50%);
+        object-fit: cover;
+
+        @include media-tablet {
+            width: 280px;
+            height: 350px;
+        }
     }
 
     &_descr {
         display: flex;
         flex-direction: column;
         align-items: center;
-        border: 1px solid #E3E1D5;
+        border: 1px solid $color-border;
         border-radius: 0px 0px 20px 20px;
     }
 
     &__name {
         margin: 9px 0 15px;
+
+        @include media-tablet {
+            margin: 10px 0 9px 0;
+        }
     }
 
     &__text {
         margin: 0 0 34px;
-        color: #717171;
+        text-align: center;
+        color: $color-additional;
+
+        @include media-tablet {
+            max-width: 201px;
+            margin: 0 0 19px;
+        }
     }
 }
 
@@ -332,6 +548,16 @@ h3 {
         display: flex;
         justify-content: space-between;
         padding: 40px 109px 129px 109px;
+
+        @include media-tablet {
+            padding: 40px 50px 0 50px;
+        }
+
+        @include media-mobile {
+            flex-direction: column;
+            justify-content: center;
+            padding: 25px 25px 40px 25px;
+        }
     }
 
     &__title {
@@ -340,20 +566,43 @@ h3 {
         font-style: normal;
         font-weight: 700;
         line-height: 4.8rem;
-        color: #000000;
+        color: $color-text-add;
+
+        @include media-tablet {
+            font-size: 3.5rem;
+            line-height: 4.2rem;
+            margin: 0 0 56px 15px;
+        }
+
+        @include media-mobile {
+            font-size: 2.5rem;
+            line-height: 3rem;
+            margin: 0 0 37px 0;
+            text-align: center;
+        }
     }
 
     &__items {
         width: 332px;
         height: 282px;
         padding: 34px 41px;
-        border: 1px solid #E3E1D5;
+        border: 1px solid $color-border;
         border-radius: 20px;
+
+        @include media-mobile {
+            width: 224px;
+            height: 235px;
+            padding: 29px 22px;
+            margin: 0 auto;
+        }
+
         >* {
             margin-bottom: 32px;
+            @include media-mobile {
+                margin-bottom: 14px;
+            }
         }
     }
-
 }
 
 .prices__btn {
@@ -363,15 +612,22 @@ h3 {
     width: 250px;
     height: 50px;
     padding: 0 40px;
-    background: #EDF2EC;
+    background: $color-background;
     font-weight: 700;
     font-size: 2rem;
-    color: #000000;
+    color: $color-text-add;
     border: none;
     border-radius: 20px;
     text-align: left;
     cursor: pointer;
 
+    @include media-mobile {
+        width: 180px;
+        height: 49.72px;
+        padding: 0 40px 0 30px;
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
 
     span {
         @extend %font-prim;
@@ -379,21 +635,19 @@ h3 {
 
     &:hover,
     &:active {
-        color: #000000;
-        background: #D6E7D2;
+        color: $color-text-add;
+        background: $color-drop-down;
         @extend %transition;
 
         .ico {
-            background: #AEA1A1;
+            background: $color-ico-inactive;
             @extend %transition;
 
             &-arrow_inactive {
                 background-image: url("../assets/icons/arrow_wh.svg");
                 transform: rotate(180deg);
             }
-
         }
-
     }
 }
 
@@ -403,11 +657,11 @@ h3 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #D9D9D9;
+    background: $color-ico;
     border-radius: 100%;
 
     &_active {
-        background: #AEA1A1;
+        background: $color-ico-inactive;
     }
 
     &-arrow_inactive {
@@ -433,6 +687,16 @@ h3 {
     align-items: end;
     background: url("../assets/images/leafs_small.png") right -10px bottom -20px/auto no-repeat;
 
+    @include media-tablet {
+        margin-top: 100px;
+        background: url("../assets/images/leafs_small.png") right -9px bottom 81px/auto no-repeat;
+    }
+
+    @include media-mobile {
+        margin: 20px auto 0;
+        background: none;
+    }
+
     &__text {
         margin: 0 0 39px;
         @extend %font-prim;
@@ -440,11 +704,24 @@ h3 {
         font-style: normal;
         font-weight: 700;
         line-height: 5rem;
-        color: #000000;
+        color: $color-text-add;
         text-align: right;
 
+        @include media-tablet {
+            font-size: 2.5rem;
+            line-height: 3.5rem;
+            margin-bottom: 28px;
+        }
+
+        @include media-mobile {
+            max-width: 230px;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
         .text-selection_green {
-            color: #499A18;
+            color: $color-heading;
         }
 
     }
@@ -452,7 +729,19 @@ h3 {
     &__btn {
         @extend %font-add;
         font-weight: 700;
-        background-color: #ffffff;
+        background-color: $color-light;
+
+        @include media-tablet {
+            margin-bottom: 297px;
+        }
+
+        @include media-mobile {
+            width: 121px;
+            height: 35px;
+            margin: 0 auto;
+            font-size: 1.5rem;
+            line-height: 2rem;
+        }
     }
 
 }
@@ -460,17 +749,39 @@ h3 {
 // Contacts
 
 .contacts {
-    background-color: #EDF2EC;
+    background-color: $color-background;
 
     &__wrapper {
         padding: 53px 109px 352px 109px;
         background: url("../assets/images/contact_woman.png") 109px 53px/auto no-repeat;
+
+        @include media-tablet {
+            padding: 40px 0 503px 0;
+            background: url("../assets/images/contact_woman.png") center bottom/26% no-repeat;
+        }
+
+        @include media-mobile {
+            padding: 25px 0 256px 0;
+            background: url("../assets/images/contact_woman.png") center bottom/30% no-repeat;
+        }
     }
 
     &__title {
         margin: 7px 0 37px 0;
         font-weight: 700;
         text-align: center;
+
+        @include media-tablet {
+            margin: 0 0 100px 0;
+            font-size: 4rem;
+            line-height: 5.2rem;
+        }
+
+        @include media-mobile {
+            margin: 0 0 80px 0;
+            font-size: 2.5rem;
+            line-height: 3.3rem;
+        }
     }
 
 }
@@ -480,6 +791,10 @@ h3 {
     &__wrapper {
         display: flex;
         justify-content: flex-end;
+
+        @include media-tablet {
+            justify-content: center;
+        }
     }
 
     &__btn {
@@ -488,16 +803,21 @@ h3 {
         align-items: center;
         width: 450px;
         height: 50px;
-        border: 1px solid #D6E7D2;
+        border: 1px solid $color-drop-down;
         border-radius: 0px;
         padding: 0 35px 0 20px;
-        background: #D6E7D2;
+        background: $color-drop-down;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
         font-size: 2rem;
         line-height: 4rem;
         letter-spacing: 0.05em;
-        color: #717171;
+        color: $color-additional;
         cursor: pointer;
+
+        @include media-mobile {
+            width: 300px;
+            padding: 0 20px;
+        }
 
         span {
             @extend %font-prim;
@@ -505,15 +825,15 @@ h3 {
 
         &:hover,
         &:active {
-            color: #717171;
-            background: #C1E698;
-            border: 1px solid #D6E7D2;
+            color: $color-additional;
+            background: $color-drop-down-active;
+            border: 1px solid $color-drop-down;
             border-radius: 0px;
             box-shadow: none;
             @extend %transition;
 
             .ico_active {
-                background: #8BA07E;
+                background: $color-ico-active;
                 @extend %transition;
             }
 
@@ -529,13 +849,13 @@ h3 {
 // .select {
 //     height: 50px;
 //     width: 450px;
-//     background: #D6E7D2;
+//     background: $color-drop-down;
 //     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 //     border: 0px;
 //     font-size: 2rem;
 //     line-height: 4rem;
 //     letter-spacing: 0.05em;
-//     color: #717171;
+//     color: $color-additional;
 //     padding-left: 20px;
 //     background: url(../assets/icons/arrow.svg) no-repeat right 35px center / 11px auto;
 //     -webkit-appearance: none;
@@ -543,8 +863,8 @@ h3 {
 //     appearance: none;
 
 //     &:hover {
-//         background: #C1E698;
-//         border: 1px solid #D6E7D2;
+//         background: $color-drop-down;
+//         border: 1px solid $color-drop-down;
 //         box-shadow: none;
 //     }
 
@@ -561,7 +881,17 @@ h3 {
         align-items: center;
         font-size: 2rem;
         line-height: 5rem;
-        color: #000000;
+        color: $color-text-add;
+
+        @include media-tablet {
+            flex-direction: column;
+            padding: 33px 0 18px 0;
+            line-height: 2.4rem;
+        }
+
+        @include media-mobile {
+            padding: 22px 0 7px 0;
+        }
     }
 
     &-copyright {
@@ -570,8 +900,23 @@ h3 {
 
         >* {
             margin-right: 20px;
+
+            @include media-tablet {
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+        }
+    }
+
+    &-rss {
+        @include media-tablet {
+            padding: 16px 0 16px;
         }
 
+        @include media-mobile {
+            padding: 16px 0 3px;
+        }
     }
 
     &-social {
@@ -579,6 +924,10 @@ h3 {
         margin: 0;
         padding: 0;
         list-style: none;
+
+        @include media-tablet {
+            margin: 9px 0 9px;
+        }
 
 
         >* {
@@ -596,11 +945,11 @@ h3 {
     }
 
     &__link {
-        color: #000000;
+        color: $color-text-add;
         text-decoration: none;
 
         &:hover {
-            color: #E06733;
+            color: $color-brand;
             @extend %transition;
         }
     }
