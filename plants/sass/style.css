@@ -479,7 +479,7 @@ h3 {
   line-height: 50px;
   list-style: none;
 }
-@media (max-width: 380px) {
+@media (max-width: 670px) {
   .nav {
     display: none;
   }
@@ -722,7 +722,7 @@ h3 {
 }
 .service__buttons {
   display: flex;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
   flex-wrap: wrap;
   row-gap: 9px;
@@ -772,9 +772,14 @@ h3 {
     row-gap: 38px;
   }
 }
-@media (max-width: 380px) {
+@media (max-width: 670px) {
   .service__items {
     justify-content: center;
+    padding-bottom: 0;
+  }
+}
+@media (max-width: 380px) {
+  .service__items {
     row-gap: 34px;
   }
 }
@@ -842,15 +847,24 @@ h3 {
   justify-content: space-between;
   padding: 40px 109px 129px 109px;
 }
+@media (max-width: 1000px) {
+  .prices__wrapper {
+    padding-bottom: 0;
+  }
+}
 @media (max-width: 768px) {
   .prices__wrapper {
     padding: 40px 50px 0 50px;
   }
 }
-@media (max-width: 380px) {
+@media (max-width: 600px) {
   .prices__wrapper {
     flex-direction: column;
     justify-content: center;
+  }
+}
+@media (max-width: 380px) {
+  .prices__wrapper {
     padding: 25px 25px 40px 25px;
   }
 }
@@ -969,7 +983,7 @@ h3 {
   align-items: end;
   background: url("../assets/images/leafs_small.png") right -10px bottom -20px/auto no-repeat;
 }
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .call-us {
     margin-top: 100px;
     background: url("../assets/images/leafs_small.png") right -9px bottom 81px/auto no-repeat;
@@ -990,7 +1004,7 @@ h3 {
   color: #000000;
   text-align: right;
 }
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .call-us__text {
     font-size: 2.5rem;
     line-height: 3.5rem;
@@ -1012,7 +1026,7 @@ h3 {
   font-weight: 700;
   background-color: #ffffff;
 }
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .call-us__btn {
     margin-bottom: 297px;
   }
@@ -1186,25 +1200,73 @@ h3 {
 
 .hamburger {
   display: none;
-  width: 40px;
-  height: 26px;
-  border-top: 2px solid #717171;
-  border-bottom: 2px solid #717171;
-  cursor: pointer;
-}
-@media (max-width: 380px) {
-  .hamburger {
-    display: inline-block;
-  }
 }
 
-.hamburger__line {
-  display: inline-block;
-  height: 10px;
-  width: 100%;
-  vertical-align: middle;
-  border-top: 2px solid #717171;
-  border-bottom: 2px solid #717171;
+.popup {
+  display: none;
+}
+
+@media (max-width: 670px) {
+  .hamburger {
+    display: inline-block;
+    width: 40px;
+    height: 26px;
+    border-top: 2px solid #717171;
+    border-bottom: 2px solid #717171;
+    cursor: pointer;
+  }
+  .hamburger__line {
+    display: inline-block;
+    height: 10px;
+    width: 100%;
+    vertical-align: middle;
+    border-top: 2px solid #717171;
+    border-bottom: 2px solid #717171;
+  }
+  .popup {
+    position: fixed;
+    top: 100px;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    z-index: 100;
+    display: flex;
+    transition: 0.3s;
+  }
+  .popup.open {
+    right: 0;
+  }
+}
+@media (max-width: 670px) {
+  .popup .nav {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    padding: 50px 0;
+    overflow: auto;
+  }
+  .popup .nav > li {
+    width: 100%;
+  }
+  .popup .nav > li > a {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: #3f3f3f;
+  }
+  .popup .nav > li > a:hover {
+    background-color: rgba(122, 82, 179, 0.1);
+  }
+  body.noscroll {
+    overflow: hidden;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
