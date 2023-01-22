@@ -1,1 +1,1 @@
-console.log("100 баллов")
+console.log("65 баллов")
