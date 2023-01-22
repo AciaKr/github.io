@@ -1,0 +1,20 @@
+.hamburger {
+    display: none;
+    width: 40px;
+    height: 26px;
+    border-top: 2px solid $color-additional;
+    border-bottom: 2px solid $color-additional;
+    cursor: pointer;
+    @include media-mobile {
+        display: inline-block;
+    }
+}
+
+.hamburger__line {
+    display: inline-block;
+    height: 10px;
+    width: 100%;
+    vertical-align: middle;
+    border-top: 2px solid $color-additional;
+    border-bottom: 2px solid $color-additional;
+}
