@@ -1,41 +1,117 @@
-console.log("65 баллов")
+console.log('65 баллов')
 
-const hamburger = document.querySelector("#hamburger");
-const popup = document.querySelector("#popup");
-// const body = document.body;
+const menu = document.querySelector('.header__navigation');
+const burger = document.querySelector('.hamburger');
+const lines = document.querySelector('.hamburger__line');
+const nav = document.querySelector('.nav');
+const body = document.body;
+// const links = document.querySelector('.nav__link');
 
-// // Клонируем меню, чтобы задать свои стили для мобильной версии
-// const menu = document.querySelector("#nav").cloneNode(1);
 
-// При клике на иконку hamb вызываем ф-ию hambHandler
-// hamburger.addEventListener("click", hamburgerHandler);
+function openMenu() {
+    document.querySelector('.header__navigation').classList.add('active');
+    document.querySelector('.hamburger').classList.add('active');
+    document.querySelector('.nav__link').classList.add('active');
+    document.querySelector('.hamburger__line').classList.add('active');
+    // burger.classList.toggle('active');
+    // nav.classList.toggle('active');
+  }
 
-// Выполняем действия при клике ..
-// function hamburgerHandler(e) {
-//   e.preventDefault();
-//   // Переключаем стили элементов при клике
-//   popup.classList.toggle("open");
-//   hamburger.classList.toggle("active");
-//   body.classList.toggle("noscroll");
-//   renderPopup();
+// burger.onclick = function () { openMenu(); }
+burger.onclick = function () {
+
+    if (burger.className !== 'active') {
+        openMenu(); 
+    } else { closeOnClick(); }
+    console.log(burger.classList.contains('active'));
+}
+//   function closeMenu() {
+//     setTimeout(() => {
+//         document.querySelector('.hamburger__line').classList.remove('active');
+//         document.querySelector('.hamburger').classList.remove('active');
+//         document.querySelector('.nav__link').classList.remove('active');
+//         document.querySelector('.header__navigation').classList.remove('active');
+//     }, 1000);
+//   }
+// if (burger.className === 'active') {
+//     burger.onclick = function () { closeOnClick(); }
 // }
 
-// // Здесь мы рендерим элементы в наш попап
-// function renderPopup() {
-//   popup.appendChild(nav);
-// }
+// console.log(burger.classList.contains('active'));
 
-// // Код для закрытия меню при нажатии на ссылку
-// const links = Array.from(nav.children);
+//   links.forEach(el => el.addEventListener('click', closeMenu));
+
+// Код для закрытия меню при нажатии на ссылку
+const links = Array.from(nav.children);
 
 // // Для каждого элемента меню при клике вызываем ф-ию
-// links.forEach((link) => {
-//   link.addEventListener("click", closeOnClick);
-// });
+links.forEach((link) => {
+  link.addEventListener("click", closeOnClick);
+});
 
 // // Закрытие попапа при клике на меню
-// function closeOnClick() {
-//   popup.classList.remove("open");
-//   hamburger.classList.remove("active");
+function closeOnClick() {
+    document.querySelector('.header__navigation').classList.remove("active");
+    document.querySelector('.hamburger__line').classList.remove('active');
+    document.querySelector('.hamburger').classList.remove('active');
+    document.querySelector('.nav__link').classList.remove('active');
 //   body.classList.remove("noscroll");
+}
+
+// function burgerMenu(selector) {
+//     const menu = document.querySelector(selector);
+//     const overlay = document.querySelector('.burger-menu_overlay');
+//     const body = document.querySelector('body');
+
+//     button.addEventListener('click', e => {
+//         e.preventDefault();
+//         toggleMenu();
+//     });
+
+//     lines.addEventListener('click', e => {
+//         e.preventDefault();
+//         toggleMenu();
+//     });
+
+//     links.addEventListener('click', () => toggleMenu);
+//     overlay.addEventListener('click', () => toggleMenu);
+
+//     function toggleMenu(){
+//         if (menu.classList.contains('header__navigation_active')) {
+//             menu.classList.remove('header__navigation_active');
+//             body.style.overflow = 'visible';
+//         } else {
+//             menu.classList.add('header__navigation_active');
+//             body.style.overflow = 'hidden';
+//         }
+//     }
 // }
+
+// burgerMenu('.header__navigation');
+
+// function burgerMenu(selector) {
+//     let menu = $(selector);
+//     let button = menu.find('.hamburger', '.hamburger__line');
+//     let links = menu.find('.nav__link');
+//     let overlay = menu.find('.burger-menu_overlay');
+    
+//     button.on('click', (e) => {
+//       e.preventDefault();
+//       toggleMenu();
+//     });
+    
+//     links.on('click', () => toggleMenu());
+//     overlay.on('click', () => toggleMenu());
+    
+//     function toggleMenu(){
+//       menu.toggleClass('header__navigation_active');
+      
+//       if (menu.hasClass('header__navigation_active')) {
+//         $('body').css('overlow', 'hidden');
+//       } else {
+//         $('body').css('overlow', 'visible');
+//       }
+//     }
+//   }
+  
+//   burgerMenu('.header__navigation');

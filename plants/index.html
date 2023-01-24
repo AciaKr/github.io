@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inika:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./sass/style.css">
     <link rel="icon" href="./favicon.ico">
-    <script src="./index.js"></script>
     <title>Plants</title>
     <meta name="description" content="Plants: We grow plants and give you oxygen and professional experienced gardeners">
 </head>
@@ -23,19 +22,19 @@
                 </a>
             </div>
             <nav class="header__navigation">
+                <div class="hamburger" id="hamburger">
+                    <span class="hamburger__line"></span>
+                </div>
                 <ul class="nav" id="nav">
-                    <li><a href="#welcome" class="nav__link nav_checked">Home</a></li>
-                    <li><a href="#about-us" class="nav__link">About us</a></li>
-                    <li><a href="#service" class="nav__link">Service</a></li>
-                    <li><a href="#price" class="nav__link">Price</a></li>
-                    <li><a href="#contacts" class="nav__link">Contacts</a></li>
+                    <li class="nav__item"><a href="#welcome" class="nav__link">Home</a></li>
+                    <li class="nav__item"><a href="#about-us" class="nav__link">About us</a></li>
+                    <li class="nav__item"><a href="#service" class="nav__link">Service</a></li>
+                    <li class="nav__item"><a href="#price" class="nav__link">Price</a></li>
+                    <li class="nav__item"><a href="#contacts" class="nav__link">Contacts</a></li>
                 </ul>
             </nav>
-            <div class="hamburger" id="hamburger">
-                <span class="hamburger__line"></span>
-            </div>
+            <div class="burger-menu_overlay"></div>
         </div>
-        <div class="popup" id="popup"></div>
     </header>
     <main>
         <section class="welcome" id="welcome">
@@ -211,5 +210,6 @@
             </ul>
         </div>
     </footer>
+    <script src="./index.js"></script>
 </body>
 </html>
