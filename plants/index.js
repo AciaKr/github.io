@@ -1,4 +1,4 @@
-console.log('65 баллов')
+console.log('65 баллов');
 
 const menu = document.querySelector('.header__navigation');
 const burger = document.querySelector('.hamburger');
