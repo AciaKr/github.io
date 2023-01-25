@@ -1,117 +1,51 @@
-console.log('65 баллов');
+console.log('75 баллов');
 
-const menu = document.querySelector('.header__navigation');
+const menu = document.querySelector('.nav__body');
 const burger = document.querySelector('.hamburger');
 const lines = document.querySelector('.hamburger__line');
 const nav = document.querySelector('.nav');
 const body = document.body;
-// const links = document.querySelector('.nav__link');
 
+// При клике на иконку hamburger вызываем openHamburger
+burger.addEventListener("click", openHamburger);
 
-function openMenu() {
-    document.querySelector('.header__navigation').classList.add('active');
-    document.querySelector('.hamburger').classList.add('active');
-    document.querySelector('.nav__link').classList.add('active');
-    document.querySelector('.hamburger__line').classList.add('active');
-    // burger.classList.toggle('active');
-    // nav.classList.toggle('active');
-  }
+// При клике на поле вне активного меню происходит его закрытие
+menu.addEventListener("click", e => {
+    if (e.target.classList.contains('nav__body')) {
+        menu.classList.remove("active");
+        nav.classList.remove("active");
+        burger.classList.remove("active");
+        lines.classList.remove("active");
+        body.classList.remove("noscroll");
+        }
+    }
 
-// burger.onclick = function () { openMenu(); }
-burger.onclick = function () {
+);
 
-    if (burger.className !== 'active') {
-        openMenu(); 
-    } else { closeOnClick(); }
-    console.log(burger.classList.contains('active'));
+// Выполняем переключение стилей при клике ..
+function openHamburger(e) {
+  e.preventDefault();
+  menu.classList.toggle("active");
+  nav.classList.toggle("active");
+  burger.classList.toggle("active");
+  lines.classList.toggle("active");
+  body.classList.toggle("noscroll");
 }
-//   function closeMenu() {
-//     setTimeout(() => {
-//         document.querySelector('.hamburger__line').classList.remove('active');
-//         document.querySelector('.hamburger').classList.remove('active');
-//         document.querySelector('.nav__link').classList.remove('active');
-//         document.querySelector('.header__navigation').classList.remove('active');
-//     }, 1000);
-//   }
-// if (burger.className === 'active') {
-//     burger.onclick = function () { closeOnClick(); }
-// }
 
-// console.log(burger.classList.contains('active'));
 
-//   links.forEach(el => el.addEventListener('click', closeMenu));
-
-// Код для закрытия меню при нажатии на ссылку
+// Закрытие меню при нажатии на ссылку меню
 const links = Array.from(nav.children);
 
-// // Для каждого элемента меню при клике вызываем ф-ию
+// Для каждого элемента меню при клике вызываем ф-ию
 links.forEach((link) => {
   link.addEventListener("click", closeOnClick);
 });
 
-// // Закрытие попапа при клике на меню
+// Закрытие бургерМеню при клике на пункты меню
 function closeOnClick() {
-    document.querySelector('.header__navigation').classList.remove("active");
-    document.querySelector('.hamburger__line').classList.remove('active');
-    document.querySelector('.hamburger').classList.remove('active');
-    document.querySelector('.nav__link').classList.remove('active');
-//   body.classList.remove("noscroll");
-}
-
-// function burgerMenu(selector) {
-//     const menu = document.querySelector(selector);
-//     const overlay = document.querySelector('.burger-menu_overlay');
-//     const body = document.querySelector('body');
-
-//     button.addEventListener('click', e => {
-//         e.preventDefault();
-//         toggleMenu();
-//     });
-
-//     lines.addEventListener('click', e => {
-//         e.preventDefault();
-//         toggleMenu();
-//     });
-
-//     links.addEventListener('click', () => toggleMenu);
-//     overlay.addEventListener('click', () => toggleMenu);
-
-//     function toggleMenu(){
-//         if (menu.classList.contains('header__navigation_active')) {
-//             menu.classList.remove('header__navigation_active');
-//             body.style.overflow = 'visible';
-//         } else {
-//             menu.classList.add('header__navigation_active');
-//             body.style.overflow = 'hidden';
-//         }
-//     }
-// }
-
-// burgerMenu('.header__navigation');
-
-// function burgerMenu(selector) {
-//     let menu = $(selector);
-//     let button = menu.find('.hamburger', '.hamburger__line');
-//     let links = menu.find('.nav__link');
-//     let overlay = menu.find('.burger-menu_overlay');
-    
-//     button.on('click', (e) => {
-//       e.preventDefault();
-//       toggleMenu();
-//     });
-    
-//     links.on('click', () => toggleMenu());
-//     overlay.on('click', () => toggleMenu());
-    
-//     function toggleMenu(){
-//       menu.toggleClass('header__navigation_active');
-      
-//       if (menu.hasClass('header__navigation_active')) {
-//         $('body').css('overlow', 'hidden');
-//       } else {
-//         $('body').css('overlow', 'visible');
-//       }
-//     }
-//   }
-  
-//   burgerMenu('.header__navigation');
+    menu.classList.remove("active");
+    nav.classList.remove("active");
+    burger.classList.remove("active");
+    lines.classList.remove("active");
+    body.classList.remove("noscroll");
+  }

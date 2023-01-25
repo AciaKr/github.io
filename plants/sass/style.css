@@ -1202,10 +1202,6 @@ h3 {
   display: none;
 }
 
-.popup {
-  display: none;
-}
-
 @media (max-width: 670px) {
   .hamburger {
     display: inline-block;
@@ -1214,9 +1210,6 @@ h3 {
     width: 40px;
     height: 26px;
     cursor: pointer;
-    -webkit-transition: 0.4s;
-    -moz-transition: 0.4s;
-    -o-transition: 0.4s;
     transition: 0.4s;
   }
   .hamburger__line {
@@ -1228,61 +1221,73 @@ h3 {
     border-top: 2px solid #717171;
     border-bottom: 2px solid #717171;
   }
-  .hamburger__line::before,
-  .hamburger__line::after {
+  .hamburger__line:before, .hamburger__line:after {
     position: absolute;
     width: 100%;
     height: 1.5px;
     background-color: #717171;
-    -webkit-transition: 0.4s;
-    -moz-transition: 0.4s;
-    -o-transition: 0.4s;
     transition: 0.4s;
   }
-  .hamburger__line::before {
+  .hamburger__line:before {
     content: "";
     top: 0;
   }
-  .hamburger__line::after {
+  .hamburger__line:after {
     content: "";
     bottom: 0;
   }
   .hamburger__line.active {
     border: none;
     transition: 0.4s;
-    background-color: transparent;
   }
-  .hamburger__line.active::before {
-    top: 0;
+  .hamburger__line.active:before {
+    top: calc(50% - 1px);
     transform: rotate(45deg);
   }
-  .hamburger__line.active::after {
-    top: 0;
+  .hamburger__line.active:after {
+    top: calc(50% - 1px);
     transform: rotate(-45deg);
+  }
+  .nav__body {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100%;
+    width: 100%;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0);
+    transition: all 0.8s;
+  }
+  .nav__body.active {
+    right: 0;
+    transition: all 0.8s;
   }
   .nav {
     padding-top: 100px;
     position: fixed;
     top: 0;
+    right: -100%;
     z-index: 20;
     display: flex;
     flex-flow: column;
     justify-content: start;
     height: 100%;
     background-color: #ffffff;
-    overflow-y: auto;
-    right: -100%;
-    -webkit-transition: 0.8s;
-    -moz-transition: 0.8s;
-    -o-transition: 0.8s;
-    transition: 0.8s;
+    overflow: auto;
+    transition: all 0.8s;
+  }
+  .nav.active {
+    right: 0;
+    transition: all 0.8s;
   }
   .nav__item {
+    padding-left: 20px;
     border-top: 1px solid #fff;
     border-bottom: 1px solid #fff;
   }
   .nav__item:hover {
     border-color: #E3E1D5;
+    transition: 0.8s;
   }
   .nav__link {
     padding: 18px 35px;
@@ -1301,26 +1306,8 @@ h3 {
     text-shadow: 0.5px 0 0 #E06733;
     transition: 0.4s;
   }
-  .header__navigation.active .nav {
-    right: 0;
-    -webkit-transition: 0.4s;
-    -moz-transition: 0.4s;
-    -o-transition: 0.4s;
-    transition: 0.4s;
-  }
-  .burger-menu_overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 10;
-    transition: 0.3s;
-  }
-  .header__navigation.active .burger-menu_overlay {
-    display: block;
-    background-color: rgba(0, 0, 0, 0.5);
+  body.noscroll {
+    overflow: hidden;
   }
 }
 
