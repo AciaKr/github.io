@@ -225,7 +225,7 @@ h3 {
             filter: blur(1.5px);
         }
 
-        @include media-mobile {
+        @media (max-width: 670px) {
             display: none;
         }
     }
@@ -237,6 +237,10 @@ h3 {
         @include media-tablet {
             max-width: 346px;
             margin: 0;
+        }
+
+        @media (max-width: 670px) {
+            max-width: none;
         }
     }
 

@@ -530,7 +530,7 @@ h3 {
     filter: blur(1.5px);
   }
 }
-@media (max-width: 380px) {
+@media (max-width: 670px) {
   .welcome__image {
     display: none;
   }
@@ -543,6 +543,11 @@ h3 {
   .welcome__content {
     max-width: 346px;
     margin: 0;
+  }
+}
+@media (max-width: 670px) {
+  .welcome__content {
+    max-width: none;
   }
 }
 .welcome__title {
