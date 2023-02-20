@@ -1,3 +1,4 @@
+import playList from './playList.js';
 
 const date = new Date();
 const hours = date.getHours();
@@ -8,11 +9,6 @@ const showedDate = document.querySelector('.date');
 const greeting = document.querySelector('.greeting');
 const nameUser = document.getElementsByTagName("input")[1];
 nameUser.placeholder = '[Enter name]';
-const slideNext = document.querySelector('.slide-next');
-const slidePrev = document.querySelector('.slide-prev');
-const playBtn = document.querySelector('.play');
-const audio = new Audio();
-
 
 // Show Current Time
 showTime();
@@ -47,14 +43,11 @@ function getTimeOfDay(hours) {
     if (3 <= rate && rate < 4) { return 'evening'; }
 }
 
-// Input/Output greeting name
-window.addEventListener('beforeunload', setLocalStorage)
-window.addEventListener('load', getLocalStorage)
-
 // Save greeting name in localStorage
 function setLocalStorage() {
     localStorage.setItem('name', nameUser.value);
 }
+window.addEventListener('beforeunload', setLocalStorage)
 
 // Get greeting name from localStorage
 function getLocalStorage() {
@@ -62,8 +55,13 @@ function getLocalStorage() {
         nameUser.value = localStorage.getItem('name');
     }
 }
+window.addEventListener('load', getLocalStorage)
 
+//------------------------
 // Change background Image
+//------------------------
+const slideNext = document.querySelector('.slide-next');
+const slidePrev = document.querySelector('.slide-prev');
 let randomNum = getRandomNum(1, 20);
 
 // Set background Image
@@ -93,6 +91,7 @@ function getSlideNext() {
     }
     setBg(randomNum);
 }
+slideNext.addEventListener('click', getSlideNext)
 
 // function getSlidePrev
 function getSlidePrev() {
@@ -103,33 +102,90 @@ function getSlidePrev() {
     }
     setBg(randomNum);
 }
-
-slideNext.addEventListener('click', getSlideNext)
 slidePrev.addEventListener('click', getSlidePrev)
 
+//-----------------
 // Audio player
+//----------------
+const audio = new Audio();
+const playBtn = document.querySelector('.play');
+const playNextBtn = document.querySelector('.play-next');
+const playPrevBtn = document.querySelector('.play-prev');
+const playListContainer = document.querySelector('.play-list');
 let isPlay = false;
+let playNum = 0;
 
+createPlayList();
+
+// Create Audio player
+function createPlayList() {
+    playList.forEach(el => {
+        const li = document.createElement('li');
+        li.classList.add('play-item');
+        playListContainer.append(li);
+        li.textContent = el.title;
+    })
+}
+
+// Play/pause track
 function playAudio() {
-    audio.src = 'https://7oom.ru/audio/naturesounds/07%20Birds%20(7oom.ru).mp3';
+    audio.src = playList[playNum].src;
     if(!isPlay) {
         audio.currentTime = 0;
         audio.play();
         isPlay = true;
+        playNow();
     } else {
         audio.pause();
         isPlay = false;
     }
 }
+playBtn.addEventListener('click', playAudio);
 
-// Switch icon player
-function toggleBtn() {
-    if(!isPlay) {
-        playBtn.classList.remove('pause');
-    } else {
-        playBtn.classList.add('pause');
-    }
+// Check current track by style
+function playNow() {
+    const playItems = document.querySelectorAll('.play-item');
+    playItems.forEach (li => {
+        li.classList.remove('item-active');
+        playItems[playNum].classList.add('item-active');
+    })
 }
 
-  playBtn.addEventListener('click', playAudio);
-  playBtn.addEventListener('click', toggleBtn);
+// Play next track after the end previous track
+audio.onended = function(){
+    playNext();
+  }
+
+// Switch icon player Play/Pause
+function toggleBtn() {
+    if(!isPlay) {
+        playBtn.classList.toggle('pause');
+    }
+}
+playBtn.addEventListener('click', toggleBtn);
+
+// function play next track
+function playNext() {
+    if (playNum == playList.length-1) {
+        playNum = 0;
+    } else {
+        playNum += 1;
+    }
+    isPlay = false;
+    playAudio(playNum);
+}
+playNextBtn.addEventListener('click', playNext);
+
+// function play previous track
+function playPrev() {
+    if (playNum == 0) {
+        playNum = playList.length-1;
+    } else {
+        playNum -= 1;
+    }
+    isPlay = false;
+    playAudio(playNum);
+}
+playPrevBtn.addEventListener('click', playPrev);
+
+
