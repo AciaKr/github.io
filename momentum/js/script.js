@@ -46,6 +46,7 @@ function getTimeOfDay(hours) {
 // Save greeting name in localStorage
 function setLocalStorage() {
     localStorage.setItem('name', nameUser.value);
+    localStorage.setItem('city', city.value);
 }
 window.addEventListener('beforeunload', setLocalStorage)
 
@@ -53,6 +54,9 @@ window.addEventListener('beforeunload', setLocalStorage)
 function getLocalStorage() {
     if(localStorage.getItem('name')) {
         nameUser.value = localStorage.getItem('name');
+    }
+    if(localStorage.getItem('city')) {
+        city.value = localStorage.getItem('city');
     }
 }
 window.addEventListener('load', getLocalStorage)
@@ -159,8 +163,8 @@ audio.onended = function(){
 // Switch icon player Play/Pause
 function toggleBtn() {
     if(!isPlay) {
-        playBtn.classList.toggle('pause');
-    }
+        playBtn.classList.remove('pause');
+    } else {playBtn.classList.add('pause');}
 }
 playBtn.addEventListener('click', toggleBtn);
 
@@ -172,7 +176,8 @@ function playNext() {
         playNum += 1;
     }
     isPlay = false;
-    playAudio(playNum);
+    playAudio();
+    toggleBtn();
 }
 playNextBtn.addEventListener('click', playNext);
 
@@ -184,8 +189,52 @@ function playPrev() {
         playNum -= 1;
     }
     isPlay = false;
-    playAudio(playNum);
+    playAudio();
+    toggleBtn();
 }
 playPrevBtn.addEventListener('click', playPrev);
+
+//------------------
+// Widget of Weather
+//------------------
+const weatherIcon = document.querySelector('.weather-icon');
+const temperature = document.querySelector('.temperature');
+const weatherDescription = document.querySelector('.weather-description');
+const windSpeed = document.querySelector('.wind');
+const humidity = document.querySelector('.humidity');
+const city = document.querySelector('.city');
+city.value = 'Minsk';
+
+async function getWeather() {
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=en&appid=08f2a575dda978b9c539199e54df03b0&units=metric`;
+    const res = await fetch(url);
+    const data = await res.json();
+    console.log(data);
+    if(data.cod == '404' || data.cod == '400') {
+        weatherIcon.className = 'weather-icon owf';
+        temperature.textContent = ``;
+        weatherDescription.textContent =  ``;
+        windSpeed.textContent =  ``;
+        humidity.textContent =  ``;
+        alert(data.message);
+    } else {
+        weatherIcon.className = 'weather-icon owf';
+        weatherIcon.classList.add(`owf-${data.weather[0].id}`);
+        temperature.textContent = `${data.main.temp.toFixed(0)}°C`;
+        weatherDescription.textContent = data.weather[0].description;
+        windSpeed.textContent = `Wind speed: ${data.wind.speed.toFixed(0)} m/s`;
+        humidity.textContent = `Humidity: ${data.main.humidity.toFixed(0)} %`;
+    }
+  }
+
+  function setCity(event) {
+    if (event.code === 'Enter') {
+      getWeather();
+      city.blur();
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', getWeather);
+  city.addEventListener('keypress', setCity);
 
 
