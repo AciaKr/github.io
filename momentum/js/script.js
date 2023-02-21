@@ -202,11 +202,14 @@ const temperature = document.querySelector('.temperature');
 const weatherDescription = document.querySelector('.weather-description');
 const windSpeed = document.querySelector('.wind');
 const humidity = document.querySelector('.humidity');
+const weatherError = document.querySelector('.weather-error');
 const city = document.querySelector('.city');
-city.value = 'Minsk';
+city.placeholder = "[Enter city]";
+if (!city.value) {city.value = 'Minsk'};
 
 // function getWeather
 async function getWeather() {
+    getLocalStorage();
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=en&appid=08f2a575dda978b9c539199e54df03b0&units=metric`;
     const res = await fetch(url);
     const weather = await res.json();
@@ -216,7 +219,7 @@ async function getWeather() {
         weatherDescription.textContent =  ``;
         windSpeed.textContent =  ``;
         humidity.textContent =  ``;
-        alert(weather.message);
+        weatherError.textContent = `Error! ${weather.message} for '${city.value}'!`;
     } else {
         weatherIcon.className = 'weather-icon owf';
         weatherIcon.classList.add(`owf-${weather.weather[0].id}`);
@@ -230,13 +233,24 @@ async function getWeather() {
 // function set city after Enter in input
 function setCity(event) {
     if (event.code === 'Enter') {
-      getWeather();
-      city.blur();
+        setLocalStorage();
+        getLocalStorage();
+        getWeather();
+        city.blur();
     }
 }
 
+onclick = () => {
+    setLocalStorage();
+    getLocalStorage();
+    getWeather();
+ };
+
 document.addEventListener('DOMContentLoaded', getWeather);
 city.addEventListener('keypress', setCity);
+window.addEventListener('click', onclick);
+
+
 
 //------------------
 // Quotes
