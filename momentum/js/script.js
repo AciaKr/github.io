@@ -3,7 +3,6 @@ import playList from './playList.js';
 const date = new Date();
 const hours = date.getHours();
 const timeOfDay = getTimeOfDay(hours);
-const body = document.body;
 const time = document.querySelector('.time');
 const showedDate = document.querySelector('.date');
 const greeting = document.querySelector('.greeting');
@@ -11,15 +10,15 @@ const nameUser = document.getElementsByTagName("input")[1];
 nameUser.placeholder = '[Enter name]';
 
 // Show Current Time
-showTime();
-
 function showTime() {
+    const date = new Date();
     const currentTime = date.toLocaleTimeString();
     time.textContent = currentTime;
-    showDate();
-    showGreeting();
+    showDate()
+    showGreeting()
     setTimeout(showTime, 1000);
 }
+showTime();
 
 // Show Current Date
 function showDate() {
@@ -35,7 +34,7 @@ function showGreeting() {
 }
 
 // Choice time of day
-function getTimeOfDay(hours) {
+function getTimeOfDay() {
     const rate = hours/6;
     if (0 <= rate && rate < 1) { return 'night'; }
     if (1 <= rate && rate < 2) { return 'morning'; }
@@ -66,6 +65,7 @@ window.addEventListener('load', getLocalStorage)
 //------------------------
 const slideNext = document.querySelector('.slide-next');
 const slidePrev = document.querySelector('.slide-prev');
+const body = document.body;
 let randomNum = getRandomNum(1, 20);
 
 // Set background Image
@@ -205,36 +205,63 @@ const humidity = document.querySelector('.humidity');
 const city = document.querySelector('.city');
 city.value = 'Minsk';
 
+// function getWeather
 async function getWeather() {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=en&appid=08f2a575dda978b9c539199e54df03b0&units=metric`;
     const res = await fetch(url);
-    const data = await res.json();
-    console.log(data);
-    if(data.cod == '404' || data.cod == '400') {
+    const weather = await res.json();
+    if(weather.cod == '404' || weather.cod == '400') {
         weatherIcon.className = 'weather-icon owf';
         temperature.textContent = ``;
         weatherDescription.textContent =  ``;
         windSpeed.textContent =  ``;
         humidity.textContent =  ``;
-        alert(data.message);
+        alert(weather.message);
     } else {
         weatherIcon.className = 'weather-icon owf';
-        weatherIcon.classList.add(`owf-${data.weather[0].id}`);
-        temperature.textContent = `${data.main.temp.toFixed(0)}°C`;
-        weatherDescription.textContent = data.weather[0].description;
-        windSpeed.textContent = `Wind speed: ${data.wind.speed.toFixed(0)} m/s`;
-        humidity.textContent = `Humidity: ${data.main.humidity.toFixed(0)} %`;
+        weatherIcon.classList.add(`owf-${weather.weather[0].id}`);
+        temperature.textContent = `${weather.main.temp.toFixed(0)}°C`;
+        weatherDescription.textContent = weather.weather[0].description;
+        windSpeed.textContent = `Wind speed: ${weather.wind.speed.toFixed(0)} m/s`;
+        humidity.textContent = `Humidity: ${weather.main.humidity.toFixed(0)} %`;
     }
-  }
+}
 
-  function setCity(event) {
+// function set city after Enter in input
+function setCity(event) {
     if (event.code === 'Enter') {
       getWeather();
       city.blur();
     }
+}
+
+document.addEventListener('DOMContentLoaded', getWeather);
+city.addEventListener('keypress', setCity);
+
+//------------------
+// Quotes
+//------------------
+const textQuote = document.querySelector('.quote');
+const authorQuote = document.querySelector('.author');
+const changeQuoteBtn = document.querySelector('.change-quote');
+let randomQuote;
+
+// function output quotes
+async function getQuotes() {
+    const quotes = './js/data.json';
+    const res = await fetch(quotes);
+    const quote = await res.json();
+    let quoteNum = getRandomNum(0, 2);
+    // check the same quotes after onload
+    while (randomQuote == quoteNum) {
+        quoteNum = getRandomNum(0, 2);
+    }
+
+    randomQuote = quoteNum;
+    textQuote.textContent = `"${quote[randomQuote].text}"`;
+    authorQuote.textContent = quote[randomQuote].author;
   }
+getQuotes();
 
-  document.addEventListener('DOMContentLoaded', getWeather);
-  city.addEventListener('keypress', setCity);
-
-
+changeQuoteBtn.addEventListener('click', getQuotes);
+document.addEventListener('DOMContentLoaded', getQuotes);
