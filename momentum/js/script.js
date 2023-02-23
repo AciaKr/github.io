@@ -14,35 +14,6 @@ const city = document.querySelector('.city');
 //     blocks: ['time', 'date','greeting', 'quote', 'weather', 'audio', 'todolist']
 // }
 
-
-
-
-// set language in browser
-function setLanguage() {
-    getLocalStorage();
-    if (!language) {language = 'en'}
-    langBtn.textContent = language;
-    localStorage.setItem('lang', language);
-    if (!city.value) {
-        city.value = weatherTranslation.defaultCity[language];
-        getWeather();
-    }
-}
-window.addEventListener('load', setLanguage);
-
-// toggle language on button
-function toggleLanguage() {
-    getLocalStorage();
-    language = language === 'en' ? 'ru' : 'en';
-    langBtn.textContent = language;
-    localStorage.setItem('lang', language);
-    if (!city.value) {city.value = weatherTranslation.defaultCity[language]}
-    if (city.value == weatherTranslation.defaultCity.ru || city.value == weatherTranslation.defaultCity.en) {
-        city.value = weatherTranslation.defaultCity[language];
-    }
-}
-langBtn.addEventListener('click', toggleLanguage);
-
 // function translate greeting en/ru
 const greetingTranslation = {
     night: {
@@ -101,6 +72,32 @@ const weatherTranslation = {
     }
 }
 
+// set language in browser
+function setLanguage() {
+    getLocalStorage();
+    if (!language) {language = 'en'}
+    langBtn.textContent = language;
+    localStorage.setItem('lang', language);
+    if (!city.value) {
+        city.value = weatherTranslation.defaultCity[language];
+        getWeather();
+    }
+}
+setLanguage()
+
+// toggle language on button
+function toggleLanguage() {
+    getLocalStorage();
+    language = language === 'en' ? 'ru' : 'en';
+    langBtn.textContent = language;
+    localStorage.setItem('lang', language);
+    if (!city.value) {city.value = weatherTranslation.defaultCity[language]}
+    if (city.value == weatherTranslation.defaultCity.ru || city.value == weatherTranslation.defaultCity.en) {
+        city.value = weatherTranslation.defaultCity[language];
+    }
+}
+langBtn.addEventListener('click', toggleLanguage);
+
 //-------------------
 // set time and date
 //-------------------
@@ -117,8 +114,8 @@ function showTime() {
     const date = new Date();
     const currentTime = date.toLocaleTimeString();
     time.textContent = currentTime;
-    showDate();
-    showGreeting();
+    showDate(date);
+    showGreeting(timeOfDay);
     setTimeout(showTime, 1000);
 }
 showTime();
@@ -168,7 +165,7 @@ function getLocalStorage() {
 window.addEventListener('load', getLocalStorage)
 
 //------------------------
-// Change background Image
+// Background Image github
 //------------------------
 const slideNext = document.querySelector('.slide-next');
 const slidePrev = document.querySelector('.slide-prev');
@@ -215,6 +212,7 @@ function getSlidePrev() {
     setBg(randomNum);
 }
 slidePrev.addEventListener('click', getSlidePrev)
+
 
 //-----------------
 // Audio player
@@ -358,8 +356,7 @@ onclick = () => {
     getWeather();
 };
 
-// document.addEventListener('DOMContentLoaded', getWeather);
-window.addEventListener('load', getWeather);
+document.addEventListener('DOMContentLoaded', getWeather);
 city.addEventListener('keypress', setCity);
 window.addEventListener('click', onclick);
 
@@ -373,6 +370,7 @@ let randomQuote;
 
 // function output quotes
 async function getQuotes() {
+    // setTimeout(getQuotes, 1000)
     const quotes = './js/data.json';
     const res = await fetch(quotes);
     const quote = await res.json();
