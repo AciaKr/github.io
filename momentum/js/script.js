@@ -1,4 +1,4 @@
-import playList from './playList.js';
+import './playList.js';
 
 //-------------------
 // Translation
@@ -214,91 +214,7 @@ function getSlidePrev() {
 slidePrev.addEventListener('click', getSlidePrev)
 
 
-//-----------------
-// Audio player
-//----------------
-const audio = new Audio();
-const playBtn = document.querySelector('.play');
-const playNextBtn = document.querySelector('.play-next');
-const playPrevBtn = document.querySelector('.play-prev');
-const playListContainer = document.querySelector('.play-list');
-let isPlay = false;
-let playNum = 0;
 
-createPlayList();
-
-// Create Audio player
-function createPlayList() {
-    playList.forEach(el => {
-        const li = document.createElement('li');
-        li.classList.add('play-item');
-        playListContainer.append(li);
-        li.textContent = el.title;
-    })
-}
-
-// Play/pause track
-function playAudio() {
-    audio.src = playList[playNum].src;
-    if(!isPlay) {
-        audio.currentTime = 0;
-        audio.play();
-        isPlay = true;
-        playNow();
-    } else {
-        audio.pause();
-        isPlay = false;
-    }
-}
-playBtn.addEventListener('click', playAudio);
-
-// Check current track by style
-function playNow() {
-    const playItems = document.querySelectorAll('.play-item');
-    playItems.forEach (li => {
-        li.classList.remove('item-active');
-        playItems[playNum].classList.add('item-active');
-    })
-}
-
-// Play next track after the end previous track
-audio.onended = function(){
-    playNext();
-  }
-
-// Switch icon player Play/Pause
-function toggleBtn() {
-    if(!isPlay) {
-        playBtn.classList.remove('pause');
-    } else {playBtn.classList.add('pause');}
-}
-playBtn.addEventListener('click', toggleBtn);
-
-// function play next track
-function playNext() {
-    if (playNum == playList.length-1) {
-        playNum = 0;
-    } else {
-        playNum += 1;
-    }
-    isPlay = false;
-    playAudio();
-    toggleBtn();
-}
-playNextBtn.addEventListener('click', playNext);
-
-// function play previous track
-function playPrev() {
-    if (playNum == 0) {
-        playNum = playList.length-1;
-    } else {
-        playNum -= 1;
-    }
-    isPlay = false;
-    playAudio();
-    toggleBtn();
-}
-playPrevBtn.addEventListener('click', playPrev);
 
 //------------------
 // Widget of Weather
@@ -368,33 +284,27 @@ const authorQuote = document.querySelector('.author');
 const changeQuoteBtn = document.querySelector('.change-quote');
 let randomQuote;
 
-// function output quotes
+// function get quotes from json
 async function getQuotes() {
-    // setTimeout(getQuotes, 1000)
     const quotes = './js/data.json';
     const res = await fetch(quotes);
-    const quote = await res.json();
-
-    if (language === "en") {
-        let quoteNumEn = getRandomNum(0, 96);
-        // check the same quotes after onload
-        while (randomQuote == quoteNumEn) {
-            quoteNumEn = getRandomNum(0, 96);
-        }
-        randomQuote = quoteNumEn;
-    }
-    if (language === "ru") {
-        let quoteNumRu = getRandomNum(0, 2);
-        // check the same quotes after onload
-        while (randomQuote == quoteNumRu) {
-            quoteNumRu = getRandomNum(0, 2);
-        }
-        randomQuote = quoteNumRu;
-    }
-    textQuote.textContent = `"${quote[language][randomQuote].text}"`;
-    authorQuote.textContent = quote[language][randomQuote].author;
+    const data = await res.json();
+    showQuotes(data);
 }
 getQuotes();
+
+// function show quotes on page
+function showQuotes(data) {
+    let quoteNum = getRandomNum(0, 95);
+    // check the same quotes after onload
+    while (randomQuote === quoteNum) {
+        quoteNum = getRandomNum(0, 95);
+    }
+    randomQuote = quoteNum;
+
+    textQuote.textContent = `"${data[language][randomQuote].text}"`;
+    authorQuote.textContent = data[language][randomQuote].author;
+}
 
 changeQuoteBtn.addEventListener('click', getQuotes);
 langBtn.addEventListener('click', getQuotes);
