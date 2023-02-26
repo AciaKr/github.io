@@ -70,7 +70,8 @@ body {
 
 .player-icon,
 .slider-icon,
-.change-quote {
+.change-quote,
+.settings-icon {
   width: 32px;
   height: 32px;
   background-size: 32px 32px;
@@ -81,20 +82,22 @@ body {
   outline: 0;
   opacity: .8;
   cursor: pointer;
-  transition: .3s;  
+  transition: .3s;
 }
 
 .player-icon:hover,
 .slider-icon:hover,
-.change-quote:hover {
+.change-quote:hover,
+.settings-icon:hover {
   opacity: 1;
 }
 
 .player-icon:active,
 .slider-icon:active,
-.change-quote:active {
+.change-quote:active,
+.settings-icon:active {
   border: 0;
-  outline: 0;  
+  outline: 0;
   transform: scale(1.1);
 }
 
@@ -248,10 +251,28 @@ body {
   min-height: 160px;
   padding: 20px;
 }
+
 .settings {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end;
+  align-items: flex-start;
+  color:#000;
+}
+
+.settings-btn {
+  width: 40px;
+  height: 40px;
+  background-size: 40px 40px;
+  background-image: url("../assets/svg/settings.svg");
+}
+
+.setting-list {
+  width: 100px;
+  height: 200px;
+  background-color: #fff;
+  opacity: .8;
+  transition: .3s;
 }
 
 .lang {

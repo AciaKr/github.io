@@ -9,11 +9,40 @@ const langBtn = document.querySelector('.lang');
 const nameUser = document.getElementsByTagName("input")[1];
 const city = document.querySelector('.city');
 
-// const state = {
-//     language: 'en',
-//     photoSource: ['github', 'unsplash', 'flickr']
-//     // blocks: ['time', 'date','greeting', 'quote', 'weather', 'audio', 'todolist']
+const state = {
+    language: 'en',
+    photoSource: ['github', 'unsplash', 'flickr'],
+    blocks: ['time', 'date','greeting', 'quote', 'weather', 'audio', 'todolist']
+}
+
+const settingsBtn = document.querySelector('.settings-btn');
+const settings = document.querySelector('.settings');
+let isOpen = false;
+
+// function toggleSettingList() {
+//     if (!isOpen) {
+//         getLocalStorage()
+//         let divSetting = document.createElement('div');
+//         divSetting.classList.add('setting-list');
+//         settings.prepend(divSetting);
+//         console.log(language)
+//         let divLanguage = document.createElement('div');
+//         divLanguage.classList.add('language-list');
+//         divSetting.append(divLanguage);
+//         divLanguage.textContent = `${settingTranslation.language[language]} ${language}`;
+
+
+
+//         isOpen = true;
+//     } else {
+//         document.querySelector('.setting-list').remove();
+//         isOpen = false;
+//         console.log('второй иф')
+//         console.log(isOpen)
+//     }
 // }
+// settingsBtn.addEventListener('click', toggleSettingList)
+
 
 // function translate greeting en/ru
 const greetingTranslation = {
@@ -73,31 +102,74 @@ const weatherTranslation = {
     }
 }
 
+// function translate error weather en/ru
+const settingTranslation = {
+    language: {
+        en: "Language: ",
+        ru: "Язык: "
+    },
+    400: {
+        en: "Error! Nothing to geocode for ",
+        ru: "Ошибка! Геокод не введен"
+    },
+    defaultCity: {
+        en: "Minsk",
+        ru: "Минск"
+    },
+    placeholderCity: {
+        en: " Enter city ",
+        ru: " Введите город "
+    },
+    windSpeed: {
+        text: {
+            en: "Wind speed",
+            ru: "Скорость ветра"
+        },
+        quantity: {
+            en: "m/s",
+            ru: "м/с"
+        }
+    },
+    humidity: {
+        en: "Humidity",
+        ru: "Влажность"
+    }
+}
+
 // set language in browser
 function setLanguage() {
     getLocalStorage();
-    if (!language) {language = 'en'}
-    langBtn.textContent = language;
-    localStorage.setItem('lang', language);
-    if (!city.value) {
-        city.value = weatherTranslation.defaultCity[language];
-        getWeather();
+    if (!language) {
+        language = 'en';
+        localStorage.setItem('lang', language);
     }
+    langBtn.textContent = language;
+    setDefaultCity(language);
 }
 setLanguage();
 
 // toggle language on button
 function toggleLanguage() {
     getLocalStorage();
-    language = language === 'en' ? 'ru' : 'en';
+    language = (language === 'en') ? 'ru' : 'en';
     langBtn.textContent = language;
     localStorage.setItem('lang', language);
-    if (!city.value) {city.value = weatherTranslation.defaultCity[language]}
-    if (city.value == weatherTranslation.defaultCity.ru || city.value == weatherTranslation.defaultCity.en) {
-        city.value = weatherTranslation.defaultCity[language];
-    }
+    // console.log(`city.value при переключении языков перед функцией setDefaultCity: ${city.value}`);
+    setDefaultCity(language);
 }
 langBtn.addEventListener('click', toggleLanguage);
+
+// Set Default City
+function setDefaultCity(language) {
+    getLocalStorage();
+    if (localStorage.getItem('city')) {
+        if (city.value === weatherTranslation.defaultCity.ru || city.value === weatherTranslation.defaultCity.en) {
+            city.value = weatherTranslation.defaultCity[language];
+            localStorage.setItem('city', city.value);
+        }
+    } else {city.value = weatherTranslation.defaultCity[language]}
+    getWeather();
+}
 
 //-------------------
 // set time and date
@@ -115,7 +187,7 @@ function showTime() {
     const date = new Date();
     const currentTime = date.toLocaleTimeString();
     time.textContent = currentTime;
-    showDate(date);
+    showDate();
     showGreeting(timeOfDay);
     setTimeout(showTime, 1000);
 }
@@ -123,19 +195,20 @@ showTime();
 
 // Show Current Date
 function showDate() {
+    const date = new Date();
     const options = {weekday: 'long', month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC'};
     const currentDate = date.toLocaleDateString(language, options);
     showedDate.textContent = currentDate;
 }
 
 // Show Greeting
-function showGreeting() {
+function showGreeting(timeOfDay) {
     greeting.textContent = greetingTranslation[timeOfDay][language];
     if (!nameUser.value) {nameUser.placeholder = `[${greetingTranslation.placeholderName[language]}]`}
 }
 
 // Choice time of day
-function getTimeOfDay() {
+function getTimeOfDay(hours) {
     const rate = hours/6;
     if (0 <= rate && rate < 1) { return 'night'; }
     if (1 <= rate && rate < 2) { return 'morning'; }
