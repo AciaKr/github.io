@@ -280,7 +280,25 @@ body {
   height: 200px;
   background-color: #ffffff;
   opacity: .7;
-  transition: background-image 1s ease-in-out;
+  /* transition: all 1s ease-out; */
+  animation: createSettingList 1s linear forwards;
+}
+
+/* .setting-list-none {
+  opacity: 0;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  animation: createSettingList 1s linear forwards;
+} */
+
+@keyframes createSettingList {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: .7;
+  }
 }
 
 .settings-item {

@@ -120,6 +120,7 @@ let isOpen = false;
 function createSettingList() {
     if (!isOpen) {
         getLocalStorage()
+        
         let divSetting = document.createElement('div');
         divSetting.classList.add('setting-list');
         settings.prepend(divSetting);
@@ -189,12 +190,13 @@ function createSettingList() {
         isOpen = true;
     } else {
         document.querySelector('.setting-list').remove();
+        // settings.firstChild.classList.remove('setting-list');
+        // settings.firstChild.classList.add('setting-list-none');
         isOpen = false;
     }
 }
 settingsBtn.addEventListener('click', createSettingList);
 document.querySelector('.header').addEventListener('click', createSettingList);
-
 
 //-------------------
 // set time and date
