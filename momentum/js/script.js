@@ -5,46 +5,18 @@ import './playList.js';
 //-------------------
 let language;
 let photoSource;
+// let blocks;
 const langBtn = document.querySelector('.lang');
 const nameUser = document.getElementsByTagName("input")[1];
 const city = document.querySelector('.city');
 
 const state = {
-    language: 'en',
-    photoSource: ['github', 'unsplash', 'flickr'],
-    blocks: ['time', 'date','greeting', 'quote', 'weather', 'audio', 'todolist']
+    language: ['en', 'ru'],
+    photoSource: ['github', 'unsplash', 'flickr']
+    // blocks: ['time', 'date','greeting', 'quote', 'weather', 'audio']
 }
 
-const settingsBtn = document.querySelector('.settings-btn');
-const settings = document.querySelector('.settings');
-let isOpen = false;
-
-// function toggleSettingList() {
-//     if (!isOpen) {
-//         getLocalStorage()
-//         let divSetting = document.createElement('div');
-//         divSetting.classList.add('setting-list');
-//         settings.prepend(divSetting);
-//         console.log(language)
-//         let divLanguage = document.createElement('div');
-//         divLanguage.classList.add('language-list');
-//         divSetting.append(divLanguage);
-//         divLanguage.textContent = `${settingTranslation.language[language]} ${language}`;
-
-
-
-//         isOpen = true;
-//     } else {
-//         document.querySelector('.setting-list').remove();
-//         isOpen = false;
-//         console.log('второй иф')
-//         console.log(isOpen)
-//     }
-// }
-// settingsBtn.addEventListener('click', toggleSettingList)
-
-
-// function translate greeting en/ru
+// translate greeting en/ru
 const greetingTranslation = {
     night: {
         en: "Good night",
@@ -68,7 +40,7 @@ const greetingTranslation = {
     }
 }
 
-// function translate error weather en/ru
+// translate error weather en/ru
 const weatherTranslation = {
     404: {
         en: "Error! City not found for ",
@@ -102,37 +74,19 @@ const weatherTranslation = {
     }
 }
 
-// function translate error weather en/ru
+// translate setting en/ru
 const settingTranslation = {
     language: {
         en: "Language: ",
         ru: "Язык: "
     },
-    400: {
-        en: "Error! Nothing to geocode for ",
-        ru: "Ошибка! Геокод не введен"
+    photoSource: {
+        en: "Photo Source: ",
+        ru: "Источник фото: "
     },
-    defaultCity: {
-        en: "Minsk",
-        ru: "Минск"
-    },
-    placeholderCity: {
-        en: " Enter city ",
-        ru: " Введите город "
-    },
-    windSpeed: {
-        text: {
-            en: "Wind speed",
-            ru: "Скорость ветра"
-        },
-        quantity: {
-            en: "m/s",
-            ru: "м/с"
-        }
-    },
-    humidity: {
-        en: "Humidity",
-        ru: "Влажность"
+    blocks: {
+        en: "View: ",
+        ru: "Отобразить: "
     }
 }
 
@@ -141,23 +95,11 @@ function setLanguage() {
     getLocalStorage();
     if (!language) {
         language = 'en';
-        localStorage.setItem('lang', language);
+        localStorage.setItem('language', language);
     }
-    langBtn.textContent = language;
     setDefaultCity(language);
 }
 setLanguage();
-
-// toggle language on button
-function toggleLanguage() {
-    getLocalStorage();
-    language = (language === 'en') ? 'ru' : 'en';
-    langBtn.textContent = language;
-    localStorage.setItem('lang', language);
-    // console.log(`city.value при переключении языков перед функцией setDefaultCity: ${city.value}`);
-    setDefaultCity(language);
-}
-langBtn.addEventListener('click', toggleLanguage);
 
 // Set Default City
 function setDefaultCity(language) {
@@ -170,6 +112,89 @@ function setDefaultCity(language) {
     } else {city.value = weatherTranslation.defaultCity[language]}
     getWeather();
 }
+
+const settingsBtn = document.querySelector('.settings-btn');
+const settings = document.querySelector('.settings');
+let isOpen = false;
+
+function createSettingList() {
+    if (!isOpen) {
+        getLocalStorage()
+        let divSetting = document.createElement('div');
+        divSetting.classList.add('setting-list');
+        settings.prepend(divSetting);
+        // create SettingList by object state
+        for(let key in state) {
+            let div = document.createElement('div');
+            div.classList.add('settings-item');
+            divSetting.append(div);
+
+            let attribute = document.createElement('div');
+            attribute.classList.add('settings-attribute');
+            div.append(attribute);
+            attribute.textContent = settingTranslation[key][language];
+
+            let options = document.createElement('div');
+            options.classList.add('settings-value');
+            div.append(options);
+
+            let ul = document.createElement('ul');
+            ul.classList.add('settings-options', `${key}`);
+            options.append(ul);
+
+            for(let value of state[key]) {
+                let li = document.createElement('li');
+                li.classList.add('settings-option');
+                ul.append(li);
+                li.textContent = value;
+                // check active option from localStorage
+                if (localStorage.getItem(`${key}`, value) === value) {
+                    li.classList.add('settings-active');
+                }
+            }
+        }
+        // function toggle options in setting
+        document.querySelector('.setting-list').addEventListener('click', function(e){
+            getLocalStorage()
+            console.log('target', e.target);
+            for(let key in state) {
+                for(let value of state[key]) {
+                    if (e.target.textContent === value) {
+                        if (!e.target.classList.contains('settings-active')) {
+                            const parentUL = e.target.closest('ul');
+                            if (parentUL.classList.contains('language')) {
+                                language = e.target.textContent;
+                                localStorage.setItem('language', e.target.textContent);
+                                setDefaultCity(language);
+                                getQuotes(language);
+                            }
+                            if (parentUL.classList.contains('photoSource')) {
+                                photoSource = e.target.textContent;
+                                localStorage.setItem('photoSource', e.target.textContent);
+                                setBg();
+                            }
+                            const childrenLi = parentUL.children;
+                            for(let children of childrenLi) {
+                                children.classList.remove('settings-active');
+                                e.target.classList.add('settings-active');
+                            };
+                        }
+                    }
+                        console.log('language', language);
+                        console.log('photoSource', photoSource);
+                        // console.log(localStorage.setItem(`'${key}'`, value));
+                }
+            }
+        });
+        isOpen = true;
+    } else {
+        document.querySelector('.setting-list').remove();
+        isOpen = false;
+    }
+}
+settingsBtn.addEventListener('click', createSettingList);
+document.querySelector('.header').addEventListener('click', createSettingList);
+
 
 //-------------------
 // set time and date
@@ -218,17 +243,24 @@ function getTimeOfDay(hours) {
 
 // Save greeting name in localStorage
 function setLocalStorage() {
-    localStorage.setItem('lang', language);
+    localStorage.setItem('language', language);
     localStorage.setItem('name', nameUser.value);
     localStorage.setItem('city', city.value);
     localStorage.setItem('photoSource', photoSource);
+    // localStorage.setItem('blocks', blocks);
+    // localStorage.setItem('date', date);
+    // localStorage.setItem('greeting', greeting);
+    // localStorage.setItem('quote', quote);
+    // localStorage.setItem('weather', weather);
+    // localStorage.setItem('audio', audio);
+
 }
 window.addEventListener('beforeunload', setLocalStorage)
 
 // Get greeting name from localStorage
 function getLocalStorage() {
-    if(localStorage.getItem('lang')) {
-        language = localStorage.getItem('lang');
+    if(localStorage.getItem('language')) {
+        language = localStorage.getItem('language');
     }
     if(localStorage.getItem('name')) {
         nameUser.value = localStorage.getItem('name');
@@ -239,6 +271,27 @@ function getLocalStorage() {
     if(localStorage.getItem('photoSource')) {
         photoSource = localStorage.getItem('photoSource');
     }
+    // if(localStorage.getItem('blocks')) {
+    //     blocks = localStorage.getItem('blocks');
+    // }
+    // if(localStorage.getItem('time')) {
+    //     isTime = localStorage.getItem('time');
+    // }
+    // if(localStorage.getItem('date')) {
+    //     date = localStorage.getItem('date');
+    // }
+    // if(localStorage.getItem('greeting')) {
+    //     greeting = localStorage.getItem('greeting');
+    // }
+    // if(localStorage.getItem('quote')) {
+    //     quote = localStorage.getItem('quote');
+    // }
+    // if(localStorage.getItem('weather')) {
+    //     weather = localStorage.getItem('weather');
+    // }
+    // if(localStorage.getItem('audio')) {
+    //     audio = localStorage.getItem('audio');
+    // }
 }
 window.addEventListener('load', getLocalStorage)
 
@@ -275,20 +328,9 @@ function setBg(randomNum) {
             photoSource = 'github';
             setBgGithub(randomNum);
     }
-    imgSource.textContent = photoSource;
     localStorage.setItem('photoSource', photoSource);
 }
 window.addEventListener('load', setBg);
-
-// toggle photoSource on button
-function togglePhotoSource() {
-    getLocalStorage();
-    photoSource = (photoSource === 'github') ? 'unsplash' : (photoSource === 'unsplash') ? 'flickr' : 'github';
-    imgSource.textContent = photoSource;
-    localStorage.setItem('photoSource', photoSource);
-    setBg();
-}
-imgSource.addEventListener('click', togglePhotoSource);
 
 // function getSlideNext
 function getSlideNext() {
@@ -446,7 +488,6 @@ function showQuotes(data) {
 }
 
 changeQuoteBtn.addEventListener('click', getQuotes);
-langBtn.addEventListener('click', getQuotes);
 document.addEventListener('DOMContentLoaded', getQuotes);
 
 
