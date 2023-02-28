@@ -112,6 +112,7 @@ const settingTranslation = {
     }
 }
 
+const body = document.body;
 const nameUser = document.getElementsByTagName("input")[1];
 const city = document.querySelector('.city');
 const player = document.querySelector('.player');
@@ -140,8 +141,9 @@ function setDefaultCity(language) {
 }
 
 //#region SettingList;
-const settingsBtn = document.querySelector('.settings-btn');
 const settings = document.querySelector('.settings');
+const settingsBtn = document.querySelector('.settings-btn');
+const settingsIcon = document.querySelector('.settings-icon');
 let isOpen = false;
 
 function createSettingList() {
@@ -149,30 +151,30 @@ function createSettingList() {
         getLocalStorage()
 
         let divSetting = document.createElement('div');
-        divSetting.classList.add('setting-list');
+        divSetting.classList.add('setting-list', 'settings-container');
         settings.prepend(divSetting);
         // create SettingList by object state
         for(let key in state) {
             let div = document.createElement('div');
-            div.classList.add('settings-item');
+            div.classList.add('settings-item', 'settings-container');
             divSetting.append(div);
 
             let attribute = document.createElement('div');
-            attribute.classList.add('settings-attribute');
+            attribute.classList.add('settings-attribute', 'settings-container');
             div.append(attribute);
             attribute.textContent = settingTranslation[key][language];
 
             let options = document.createElement('div');
-            options.classList.add('settings-value');
+            options.classList.add('settings-value', 'settings-container');
             div.append(options);
 
             let ul = document.createElement('ul');
-            ul.classList.add('settings-options', `${key}`);
+            ul.classList.add('settings-options', `${key}`, 'settings-container');
             options.append(ul);
 
             for(let value of state[key]) {
                 let li = document.createElement('li');
-                li.classList.add('settings-option');
+                li.classList.add('settings-option', 'settings-container');
                 li.setAttribute('id', `${value}`);
                 ul.append(li);
                 if (settingTranslation[value]) {
@@ -185,6 +187,8 @@ function createSettingList() {
                 }
             }
         }
+        settingsIcon.classList.add('active');
+
         // function toggle options in setting
         document.querySelector('.setting-list').addEventListener('click', function(e){
             getLocalStorage()
@@ -224,7 +228,6 @@ function createSettingList() {
                                 localStorage.setItem('blocks', blocksArray)
                             }
                             e.target.classList.toggle('settings-active');
-                            console.log('blocks', blocks);
                             checkSetting();
                         }
                     }
@@ -234,12 +237,22 @@ function createSettingList() {
         isOpen = true;
     } else {
         document.querySelector('.setting-list').remove();
+        settingsIcon.classList.remove('active');
         isOpen = false;
     }
 }
 settingsBtn.addEventListener('click', createSettingList);
 
-
+// function close setting-list when click outside setting-list
+body.addEventListener("click", e => {
+    console.log(e.target)
+    if (!e.target.classList.contains('settings-container') && !e.target.classList.contains('settings-btn')) {
+        document.querySelector('.setting-list').remove();
+        settingsIcon.classList.remove('active');
+        isOpen = false;
+        }
+    }
+);
 //#endregion
 
 //-------------------
@@ -292,7 +305,6 @@ function getTimeOfDay(hours) {
 //------------------------
 const slideNext = document.querySelector('.slide-next');
 const slidePrev = document.querySelector('.slide-prev');
-const body = document.body;
 let randomNum = getRandomNum(1, 20);
 
 // function create random number image included min and max
@@ -520,14 +532,14 @@ window.addEventListener('load', getLocalStorage)
 // Setting
 //---------------
 
-
 function setBlocks() {
     getLocalStorage();
     if (!blocksArray) {
         blocks = new Set(state.blocks);
         blocksArray = [...blocks];
         localStorage.setItem('blocks', blocksArray);
-    } else {
+    }
+    if (typeof(blocksArray) === 'string') {
         blocksArray = blocksArray.split(',');
         blocks = new Set(blocksArray);
     }
