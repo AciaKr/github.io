@@ -238,7 +238,7 @@ function createSettingList() {
     }
 }
 settingsBtn.addEventListener('click', createSettingList);
-document.querySelector('.header').addEventListener('click', createSettingList);
+
 
 //#endregion
 
