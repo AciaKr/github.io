@@ -3,18 +3,16 @@ import './playList.js';
 //-------------------
 // Translation
 //-------------------
-let language;
-let photoSource;
-// let blocks;
-const langBtn = document.querySelector('.lang');
-const nameUser = document.getElementsByTagName("input")[1];
-const city = document.querySelector('.city');
-
 const state = {
     language: ['en', 'ru'],
-    photoSource: ['github', 'unsplash', 'flickr']
-    // blocks: ['time', 'date','greeting', 'quote', 'weather', 'audio']
+    photoSource: ['github', 'unsplash', 'flickr'],
+    blocks: ['time', 'date','greeting', 'quote', 'weather', 'audio']
 }
+
+let language;
+let photoSource;
+let blocks;
+let blocksArray;
 
 // translate greeting en/ru
 const greetingTranslation = {
@@ -87,8 +85,36 @@ const settingTranslation = {
     blocks: {
         en: "View: ",
         ru: "Отобразить: "
+    },
+    time: {
+        en: "Time",
+        ru: "Время"
+    },
+    date: {
+        en: "Date",
+        ru: "Дата"
+    },
+    greeting: {
+        en: "Greeting",
+        ru: "Приветствие"
+    },
+    quote: {
+        en: "Quote",
+        ru: "Цитаты"
+    },
+    weather: {
+        en: "Weather",
+        ru: "Погода"
+    },
+    audio: {
+        en: "Audio",
+        ru: "Аудио"
     }
 }
+
+const nameUser = document.getElementsByTagName("input")[1];
+const city = document.querySelector('.city');
+const player = document.querySelector('.player');
 
 // set language in browser
 function setLanguage() {
@@ -113,6 +139,7 @@ function setDefaultCity(language) {
     getWeather();
 }
 
+//#region SettingList;
 const settingsBtn = document.querySelector('.settings-btn');
 const settings = document.querySelector('.settings');
 let isOpen = false;
@@ -120,7 +147,7 @@ let isOpen = false;
 function createSettingList() {
     if (!isOpen) {
         getLocalStorage()
-        
+
         let divSetting = document.createElement('div');
         divSetting.classList.add('setting-list');
         settings.prepend(divSetting);
@@ -146,10 +173,14 @@ function createSettingList() {
             for(let value of state[key]) {
                 let li = document.createElement('li');
                 li.classList.add('settings-option');
+                li.setAttribute('id', `${value}`);
                 ul.append(li);
-                li.textContent = value;
+                if (settingTranslation[value]) {
+                    li.textContent = settingTranslation[value][language];
+                } else {li.textContent = value;}
+
                 // check active option from localStorage
-                if (localStorage.getItem(`${key}`, value) === value) {
+                if (localStorage.getItem(`${key}`, value) === value || localStorage.getItem(`${key}`, value).includes(value)) {
                     li.classList.add('settings-active');
                 }
             }
@@ -157,46 +188,59 @@ function createSettingList() {
         // function toggle options in setting
         document.querySelector('.setting-list').addEventListener('click', function(e){
             getLocalStorage()
-            console.log('target', e.target);
             for(let key in state) {
                 for(let value of state[key]) {
-                    if (e.target.textContent === value) {
-                        if (!e.target.classList.contains('settings-active')) {
-                            const parentUL = e.target.closest('ul');
-                            if (parentUL.classList.contains('language')) {
-                                language = e.target.textContent;
-                                localStorage.setItem('language', e.target.textContent);
-                                setDefaultCity(language);
-                                getQuotes(language);
+                    console.log(e.target)
+                    if (e.target.id === value) {
+                        const parentUL = e.target.closest('ul');
+                        if (!parentUL.classList.contains('blocks')) {
+                            if (!e.target.classList.contains('settings-active')) {
+                                if (parentUL.classList.contains('language')) {
+                                    language = e.target.id;
+                                    localStorage.setItem('language', e.target.id);
+                                    setDefaultCity(language);
+                                    getQuotes(language);
+                                }
+                                if (parentUL.classList.contains('photoSource')) {
+                                    photoSource = e.target.id;
+                                    localStorage.setItem('photoSource', e.target.id);
+                                    setBg();
+                                }
+                                const childrenLi = parentUL.children;
+                                for(let children of childrenLi) {
+                                    children.classList.remove('settings-active');
+                                    e.target.classList.add('settings-active');
+                                };
                             }
-                            if (parentUL.classList.contains('photoSource')) {
-                                photoSource = e.target.textContent;
-                                localStorage.setItem('photoSource', e.target.textContent);
-                                setBg();
+                        } else {
+                            setBlocks()
+                            if (blocks.has(e.target.id)) {
+                                blocks.delete(e.target.id);
+                                blocksArray = [...blocks];
+                                localStorage.setItem('blocks', blocksArray)
+                            } else {
+                                blocks.add(e.target.id);
+                                blocksArray = [...blocks];
+                                localStorage.setItem('blocks', blocksArray)
                             }
-                            const childrenLi = parentUL.children;
-                            for(let children of childrenLi) {
-                                children.classList.remove('settings-active');
-                                e.target.classList.add('settings-active');
-                            };
+                            e.target.classList.toggle('settings-active');
+                            console.log('blocks', blocks);
+                            checkSetting();
                         }
                     }
-                        console.log('language', language);
-                        console.log('photoSource', photoSource);
-                        // console.log(localStorage.setItem(`'${key}'`, value));
                 }
             }
         });
         isOpen = true;
     } else {
         document.querySelector('.setting-list').remove();
-        // settings.firstChild.classList.remove('setting-list');
-        // settings.firstChild.classList.add('setting-list-none');
         isOpen = false;
     }
 }
 settingsBtn.addEventListener('click', createSettingList);
 document.querySelector('.header').addEventListener('click', createSettingList);
+
+//#endregion
 
 //-------------------
 // set time and date
@@ -207,7 +251,7 @@ const timeOfDay = getTimeOfDay(hours);
 const time = document.querySelector('.time');
 const showedDate = document.querySelector('.date');
 const greeting = document.querySelector('.greeting');
-
+const greetingContainer = document.querySelector('.greeting-container');
 
 // Show Current Time
 function showTime() {
@@ -243,66 +287,11 @@ function getTimeOfDay(hours) {
     if (3 <= rate && rate < 4) { return 'evening'; }
 }
 
-// Save greeting name in localStorage
-function setLocalStorage() {
-    localStorage.setItem('language', language);
-    localStorage.setItem('name', nameUser.value);
-    localStorage.setItem('city', city.value);
-    localStorage.setItem('photoSource', photoSource);
-    // localStorage.setItem('blocks', blocks);
-    // localStorage.setItem('date', date);
-    // localStorage.setItem('greeting', greeting);
-    // localStorage.setItem('quote', quote);
-    // localStorage.setItem('weather', weather);
-    // localStorage.setItem('audio', audio);
-
-}
-window.addEventListener('beforeunload', setLocalStorage)
-
-// Get greeting name from localStorage
-function getLocalStorage() {
-    if(localStorage.getItem('language')) {
-        language = localStorage.getItem('language');
-    }
-    if(localStorage.getItem('name')) {
-        nameUser.value = localStorage.getItem('name');
-    }
-    if(localStorage.getItem('city')) {
-        city.value = localStorage.getItem('city');
-    }
-    if(localStorage.getItem('photoSource')) {
-        photoSource = localStorage.getItem('photoSource');
-    }
-    // if(localStorage.getItem('blocks')) {
-    //     blocks = localStorage.getItem('blocks');
-    // }
-    // if(localStorage.getItem('time')) {
-    //     isTime = localStorage.getItem('time');
-    // }
-    // if(localStorage.getItem('date')) {
-    //     date = localStorage.getItem('date');
-    // }
-    // if(localStorage.getItem('greeting')) {
-    //     greeting = localStorage.getItem('greeting');
-    // }
-    // if(localStorage.getItem('quote')) {
-    //     quote = localStorage.getItem('quote');
-    // }
-    // if(localStorage.getItem('weather')) {
-    //     weather = localStorage.getItem('weather');
-    // }
-    // if(localStorage.getItem('audio')) {
-    //     audio = localStorage.getItem('audio');
-    // }
-}
-window.addEventListener('load', getLocalStorage)
-
 //------------------------
 // Background Image
 //------------------------
 const slideNext = document.querySelector('.slide-next');
 const slidePrev = document.querySelector('.slide-prev');
-const imgSource = document.querySelector('.img-source');
 const body = document.body;
 let randomNum = getRandomNum(1, 20);
 
@@ -408,6 +397,7 @@ const weatherDescription = document.querySelector('.weather-description');
 const windSpeed = document.querySelector('.wind');
 const humidity = document.querySelector('.humidity');
 const weatherError = document.querySelector('.weather-error');
+const weatherContainer = document.querySelector('.weather');
 
 // function getWeather
 async function getWeather() {
@@ -416,6 +406,7 @@ async function getWeather() {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=${language}&appid=08f2a575dda978b9c539199e54df03b0&units=metric`;
     const res = await fetch(url);
     const weather = await res.json();
+
     if (weather.cod == '404' || weather.cod == '400') {
         weatherIcon.className = 'weather-icon owf';
         temperature.textContent = ``;
@@ -465,6 +456,7 @@ window.addEventListener('click', onclick);
 const textQuote = document.querySelector('.quote');
 const authorQuote = document.querySelector('.author');
 const changeQuoteBtn = document.querySelector('.change-quote');
+const quotesContainer = document.querySelector('.quotes');
 let randomQuote;
 
 // function get quotes from json
@@ -492,4 +484,79 @@ function showQuotes(data) {
 changeQuoteBtn.addEventListener('click', getQuotes);
 document.addEventListener('DOMContentLoaded', getQuotes);
 
+//--------------
+// localStorage
+//--------------
+// Save item in localStorage
+function setLocalStorage() {
+    localStorage.setItem('language', language);
+    localStorage.setItem('name', nameUser.value);
+    localStorage.setItem('city', city.value);
+    localStorage.setItem('photoSource', photoSource);
+}
+window.addEventListener('beforeunload', setLocalStorage)
 
+// Get item from localStorage
+function getLocalStorage() {
+    if(localStorage.getItem('language')) {
+        language = localStorage.getItem('language');
+    }
+    if(localStorage.getItem('name')) {
+        nameUser.value = localStorage.getItem('name');
+    }
+    if(localStorage.getItem('city')) {
+        city.value = localStorage.getItem('city');
+    }
+    if(localStorage.getItem('photoSource')) {
+        photoSource = localStorage.getItem('photoSource');
+    }
+    if(localStorage.getItem('blocks')) {
+        blocksArray = localStorage.getItem('blocks');
+    }
+}
+window.addEventListener('load', getLocalStorage)
+
+//----------------
+// Setting
+//---------------
+
+
+function setBlocks() {
+    getLocalStorage();
+    if (!blocksArray) {
+        blocks = new Set(state.blocks);
+        blocksArray = [...blocks];
+        localStorage.setItem('blocks', blocksArray);
+    } else {
+        blocksArray = blocksArray.split(',');
+        blocks = new Set(blocksArray);
+    }
+    checkSetting();
+}
+window.addEventListener('load', setBlocks);
+
+function checkSetting() {
+    if (blocks.has('time')) {
+        time.classList.remove('hidden');
+    } else {time.classList.add('hidden')}
+
+    if (blocks.has('date')) {
+        showedDate.classList.remove('hidden');
+    } else {showedDate.classList.add('hidden')}
+
+    if (blocks.has('greeting')) {
+        greetingContainer.classList.remove('hidden');
+    } else {greetingContainer.classList.add('hidden')}
+
+    if (blocks.has('weather')) {
+        weatherContainer.classList.remove('hidden');
+    } else {weatherContainer.classList.add('hidden')}
+
+    if (blocks.has('audio')) {
+        player.classList.remove('hidden');
+    } else {player.classList.add('hidden')}
+
+    if (blocks.has('quote')) {
+        quotesContainer.classList.remove('hidden');
+    } else {quotesContainer.classList.add('hidden')}
+}

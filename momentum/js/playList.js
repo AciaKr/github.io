@@ -30,6 +30,7 @@ const playBtn = document.querySelector('.play');
 const playNextBtn = document.querySelector('.play-next');
 const playPrevBtn = document.querySelector('.play-prev');
 const playListContainer = document.querySelector('.play-list');
+
 let isPlay = false;
 let playNum = 0;
 

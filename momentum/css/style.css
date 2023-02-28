@@ -202,6 +202,7 @@ body {
   font-family: 'Arial-MT';
   font-size: 100px;
   letter-spacing: -4px;
+  visibility: visible;
 }
 
 .date {
@@ -277,7 +278,7 @@ body {
   bottom: 0;
   z-index: 10;
   width: 170px;
-  height: 200px;
+  height: 350px;
   background-color: #ffffff;
   opacity: .7;
   /* transition: all 1s ease-out; */
@@ -299,6 +300,12 @@ body {
   100% {
     opacity: .7;
   }
+}
+
+.hidden {
+  visibility: hidden;
+  /* transition: visibility 2s ease-out;
+  animation: visibility 1s linear forwards; */
 }
 
 .settings-item {
