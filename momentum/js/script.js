@@ -204,6 +204,7 @@ function createSettingList() {
                                     localStorage.setItem('language', e.target.id);
                                     setDefaultCity(language);
                                     getQuotes(language);
+                                    createSettingList(language);
                                 }
                                 if (parentUL.classList.contains('photoSource')) {
                                     photoSource = e.target.id;
@@ -549,16 +550,16 @@ window.addEventListener('load', setBlocks);
 
 function checkSetting() {
     if (blocks.has('time')) {
-        time.classList.remove('hidden');
-    } else {time.classList.add('hidden')}
+        time.classList.remove('time-hidden');
+    } else {time.classList.add('time-hidden')}
 
     if (blocks.has('date')) {
         showedDate.classList.remove('hidden');
     } else {showedDate.classList.add('hidden')}
 
     if (blocks.has('greeting')) {
-        greetingContainer.classList.remove('hidden');
-    } else {greetingContainer.classList.add('hidden')}
+        greetingContainer.classList.remove('greeting-hidden');
+    } else {greetingContainer.classList.add('greeting-hidden')}
 
     if (blocks.has('weather')) {
         weatherContainer.classList.remove('hidden');
@@ -569,6 +570,6 @@ function checkSetting() {
     } else {player.classList.add('hidden')}
 
     if (blocks.has('quote')) {
-        quotesContainer.classList.remove('hidden');
-    } else {quotesContainer.classList.add('hidden')}
+        quotesContainer.classList.remove('quotes-hidden');
+    } else {quotesContainer.classList.add('quotes-hidden')}
 }
